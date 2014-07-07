@@ -1,0 +1,82 @@
+.mycontent {
+    background-color:rgba(255,255,255,0.8);
+    min-height: 400px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 50px;
+    padding: 20px;
+}
+
+.navbar {
+    margin-top: 20px;
+}
+
+.usernamebox {
+    margin-top: 10px;
+    padding: 10px;
+    background-color:rgba(200,200,255,0.8);
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#status {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    width: 130px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#status h1 {
+    font-size: smaller;
+    margin: 3px;
+}
+
+#status .label {
+    display: inline-block;
+    width: 70px;
+}
+#status .value {
+}
+
+body {
+    padding-top: 50px;
+    padding-left: 50px;
+    background-color:transparent;
+    background:url(../img/bg.jpg);
+    background-repeat:no-repeat;
+}
+
+.overviewbox {
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    background-color:rgba(255,255,255,0.8);
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.overviewbox img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.overviewbox span {
+    display: block;
+    font-size: 200%;
+}
+
+.overviewbox span.count {
+    font-size: 500%;
+}
+
+.overviewbox a.fill-div {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}

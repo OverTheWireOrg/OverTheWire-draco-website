@@ -1,0 +1,19 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="data">
+<div ng-show="data.host">
+<h1>{{data.host}}</h1>
+<b>Last update:
+<span am-time-ago="data.lastContact * 1000"></span></b>
+
+<div data-ng-bind-html="body"></div>
+</div>
+
+<div ng-hide="data.host">
+Unknown host
+</div>
+</div>
+
+<div ng-hide="data">
+<img src="img/spinner.gif">
+</div>
+</div>

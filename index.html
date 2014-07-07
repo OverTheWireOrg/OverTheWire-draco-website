@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OverTheWire Warzone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet type=text/css href="css/bootstrap.css">
+    <link rel=stylesheet type=text/css href="css/custom.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-route.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/angular/angular-moment.min.js"></script>
+    <script src="js/highstock.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stats/code-flags.js"></script>
+    <script src="js/stats/code-overview.js"></script>
+    <script src="js/stats/code-today.js"></script>
+    <script src="js/warzone.js"></script>
+  </head>
+  <body ng-app="warzoneApp">
+     <div class="row" ng-controller="retrieveUsernameController">
+     <div class="container col-md-2">
+	<div class="usernamebox">
+	    <div ng-show="user">
+	    <div ng-hide="user.name">
+	    You are unknown to us, connecting from {{user.ip}}
+	    <a href="/#/register">Register</a>
+	    </div>
+
+	    <div ng-show="user.name">
+	    We know you as <a href="{{user.profile_url}}">{{user.name}}</a>, connecting from {{user.ip}}
+	    </div>
+	    </div>
+
+	    <div ng-hide="user">
+	    <img src="img/spinner.gif">
+	    </div>
+        </div>
+	<div class="navbar navbar-inverse" role="navigation">
+          <ul class="nav nav-pills nav-stacked">
+	    <li><a href="/#/overview">Live overview</a></li>
+	    <li><a href="/#/stats">Statistics</a></li>
+	    <li><a href="/#/help">Help</a></li>
+          </ul>
+        </div>
+    </div>
+
+    <div ng-view></div>
+    </div><!-- /.row -->
+  </body>
+</html>

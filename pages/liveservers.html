@@ -1,0 +1,12 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="data">
+<h1>Live servers</h1>
+<div ng-repeat="host in data">
+<a href="/#/host/{{host.name}}">{{host.name}}</a> <span am-time-ago="host.lastChange * 1000"></span>
+</div>
+</div>
+
+<div ng-hide="data">
+<img src="img/spinner.gif">
+</div>
+</div>

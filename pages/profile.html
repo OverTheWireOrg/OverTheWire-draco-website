@@ -1,0 +1,36 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="data">
+<div ng-show="data.name">
+<h1>Warzone profile of {{data.name}}</h1>
+
+<div ng-show="user.name == data.name" class="alert alert-info">
+This is the account you are authenticated with!
+</div>
+
+
+<div class="container col-md-3">
+<img src="/img/{{data.type}}.png">
+</div>
+<div class="container col-md-7 mycontent">
+<pre>
+Account-type: {{data.type}}
+Account status: {{data.status}}
+Last operation: {{data.lastOperation}}
+Last operation change: <span am-time-ago="data.lastOperationChange * 1000"></span>
+Configuration tarball: <a href="{{data.tarball_url}}">{{data.name}}.tar.gz</a>
+<div ng-show="data.type == 'router'">
+Allocated IP range: {{data.network}}/{{data.cidr}}
+</div>
+</pre>
+</div>
+
+</div>
+<div ng-hide="data.name">
+Unknown user
+</div>
+</div>
+
+<div ng-hide="data">
+<img src="img/spinner.gif">
+</div>
+</div>

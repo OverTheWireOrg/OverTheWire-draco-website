@@ -1,0 +1,13 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="error">{{error}}</div>
+<form novalidate class="simple-form">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" ng-model="account.username" />
+    <label for="type">Account type</label>
+    <select ng-model="account.type" ng-options="t for t in accountTypes"></select>
+    <br/>
+    <label for="csr">CSR</label>
+    <textarea name="csr" rows="20" cols="85" id="csr" ng-model="account.csr"></textarea><br/>
+    <button ng-click="update(account)">SAVE</button>
+</form>
+</div>

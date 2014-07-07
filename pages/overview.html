@@ -1,0 +1,29 @@
+<div ng-show="stats">
+<div class="container col-md-9">
+
+<div class="container col-md-1"></div>
+
+<div class="container col-md-3 overviewbox"><a class="fill-div" href="/#/liveclients"><img src="/img/client.png">
+<span class="count">{{ stats.clients }}</span>
+<span><ng-pluralize count="stats.clients" when="{'one': 'Client', 'other': 'Clients'}"></ng-pluralize></span>
+</a></div>
+
+<div class="container col-md-3 overviewbox"><a class="fill-div" href="/#/liveservers"><img src="/img/server.png">
+<span class="count">{{ stats.servers }}</span>
+<span><ng-pluralize count="stats.servers" when="{'one': 'Server', 'other': 'Servers'}"></ng-pluralize></span>
+</a></div>
+
+<div class="container col-md-3 overviewbox"><a class="fill-div" href="/#/liverouters"><img src="/img/router.png">
+<span class="count">{{ stats.routers }}</span>
+<span><ng-pluralize count="stats.routers" when="{'one': 'Router', 'other': 'Routers'}"></ng-pluralize></span>
+</a></div>
+
+<div class="container col-md-1"></div>
+
+</div>
+</div>
+
+<div ng-hide="stats">
+<div class="container col-md-9 mycontent">
+<img src="img/spinner.gif">
+</div>
