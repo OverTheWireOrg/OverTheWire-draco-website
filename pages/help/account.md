@@ -1,4 +1,3 @@
-<div class="container col-md-9 mycontent">
 Warzone account
 ===============
 
@@ -11,10 +10,11 @@ There are two types of accounts: clients and routers.
 Client accounts
 ---------------
 
+
 Router accounts
 ---------------
 
 Registering an account
 ----------------------
 
-</div>
+Create a CSR, pick a username

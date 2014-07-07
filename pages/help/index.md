@@ -1,4 +1,3 @@
-<div class="container col-md-9 mycontent">
 Draco warzone
 =============
 
@@ -51,5 +50,3 @@ In no specific order:
 - vulnhost dependencies
 - linking up multiple warzones
 - an ircbot that indicates hosts connecting/disconnecting
-
-</div>
