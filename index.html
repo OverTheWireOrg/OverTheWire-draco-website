@@ -66,7 +66,7 @@
 </div>
 <div class="col-md-10">
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="Your username..." class="input-xlarge" ng-model="account.username" />
+    <input id="textinput" name="textinput" type="text" placeholder="Your username..." class="input-xlarge roundInput" ng-model="account.username" />
     <p class="help-block">Your username identifies you on the warzone and will be used in both the VPN and warzone registry credentials.</p>
   </div>
 </div>
@@ -77,13 +77,11 @@
   <label class="control-label" for="button1id">Account type</label>
 </div>
 <div class="col-md-10">
-    <div class="btn-group" data-toggle="buttons">
-	<label class="btn btn-primary" ng-repeat="t in accountTypes" 
-	    ng-class="{active:account.type==t}" 
+	<label class="btn" ng-repeat="t in accountTypes" 
+	    ng-class="{'btn-primary':account.type==t}" 
 	    ng-click="setAccountType(t)">
-		<input type="radio">{{t}}
+		{{t}}
 	</label>
-  </div>
   <p class="help-block">Client accounts are recommended for beginners, since they offer
 network-level protection. Router accounts are for advanced users not needing protection. In addition, router accounts have the ability to connect servers to the warzone.</p>
 </div>
