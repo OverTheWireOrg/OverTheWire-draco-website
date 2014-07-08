@@ -15,10 +15,6 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
     $routeProvider
 	.when('/help', 		{ templateUrl : 'pages/help/index.html' })
 	.when('/help/account', 	{ templateUrl : 'pages/help/account.html' })
-	.when('/register', {
-		templateUrl : 'pages/register.html',
-		controller  : 'registerController'
-	})
 	.when('/profile/:username', {
 		templateUrl : 'pages/profile.html',
 		controller  : 'profileController'
@@ -59,7 +55,34 @@ warzoneApp.controller("registerController", ["$scope", "$location", "$http", fun
     $scope.accountTypes = ["client", "router"];
     $scope.account = {};
     $scope.account.type = "client";
-    $scope.update = function(x) { 
+    $scope.setAccountType = function(x) {
+	$scope.account.type = x;
+    };
+    $scope.updateCSR = function() {
+	var file = $("#selectCSRFile").get(0).files[0];
+	var reader = new FileReader();
+
+	reader.onload = function(e) {
+	    var filecontent = reader.result;
+	    if(filecontent.indexOf("-----BEGIN CERTIFICATE REQUEST-----") == 0) {
+		$scope.account.csr = filecontent;
+		$scope.error = "This file looks like a CSR";
+	    } else {
+		$scope.account.csr = "";
+		$scope.error = "This file is not a CSR";
+	    }
+	    // since we're going through jQuery, we need to notify AngularJS that something changed while it wasn't looking
+	    $scope.$apply();
+	}
+
+	reader.readAsText(file);  
+    };
+    // this is a dirty hack to trigger an update when a (new) file is selected. AngularJS doesn't support onChange for
+    // inputs of type "file" yet, so using jQuery to register a handler
+    $('#registrationModal').on('shown.bs.modal', function (e) {
+	$("#selectCSRFile").change($scope.updateCSR);
+    });
+    $scope.register = function(x) { 
 	    var token = randomString(32);
 	    $http.post('/s/register', {
 	    		"username": $scope.account.username, 
@@ -69,7 +92,15 @@ warzoneApp.controller("registerController", ["$scope", "$location", "$http", fun
 			}, {headers: {'X-CSRF-Token': token}})
 		.success(function(data) {
 		    if(data.success) {
-			$location.path("/profile/"+$scope.account.username);
+		        // wait until modal is closed before going elsewhere
+			var username = $scope.account.username;
+		        $('#registrationModal').on("hidden.bs.modal", function() {
+			    console.log("Going to "+"/profile/" + username);
+			    $location.path("/profile/" + username);
+			    console.log("Done going to "+"/profile/" + username);
+			    $scope.$apply();
+			});
+		        $('#registrationModal').modal("hide");
 		    } else {
 			$scope.error = data.msg;
 		    }
@@ -150,4 +181,3 @@ warzoneApp.controller("overviewController", ["$scope", "$http", "$interval", //{
 	}
 ]);
 //}}}
-

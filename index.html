@@ -25,7 +25,7 @@
 	    <div ng-show="user">
 	    <div ng-hide="user.name">
 	    You are unknown to us, connecting from {{user.ip}}
-	    <a href="/#/register">Register</a>
+	    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrationModal">Register</button>
 	    </div>
 
 	    <div ng-show="user.name">
@@ -48,5 +48,45 @@
 
     <div ng-view></div>
     </div><!-- /.row -->
+
+    <!-- registration modal -->
+    <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true" ng-controller="registerController">
+      <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	    <h4 class="modal-title" id="registrationModalLabel">Register warzone account</h4>
+	  </div>
+	  <div class="modal-body">
+    <div ng-show="error">{{error}}</div>
+	    <label>Username</label>
+	    <input type="text" name="username" id="username" ng-model="account.username" />
+	    <br/>
+	    <label>Account type</label>
+	    <div class="btn-group" data-toggle="buttons">
+		<label class="btn btn-primary" ng-repeat="t in accountTypes" 
+		    ng-class="{active:account.type==t}" 
+		    ng-click="setAccountType(t)">
+			<input type="radio">{{t}}
+		</label>
+	    </div>	
+	    <br/>
+	    <label>CSR</label>
+	    <input id="selectCSRFile" type="file">
+	    <pre ng-show="account.csr">{{account.csr}}</pre>
+
+	  </div>
+	  <div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    <button type="button" class="btn btn-primary" ng-click="register(account)">Register</button>
+	  </div>
+	</div>
+      </div>
+    </div>
+
   </body>
 </html>
+
+
+
+
