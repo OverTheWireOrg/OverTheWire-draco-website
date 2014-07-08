@@ -17,6 +17,17 @@
     background-color:rgba(200,200,255,0.8);
     -moz-border-radius: 3px;
     border-radius: 3px;
+    font-size: smaller;
+    text-align: center;
+}
+
+.usernamebox span.username {
+    font-size: 250%;
+    font-weight:bold;
+}
+
+.registerButtonContainer {
+    margin: 10px;
 }
 
 #status {
@@ -85,3 +96,4 @@ body {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+

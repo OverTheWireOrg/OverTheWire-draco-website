@@ -21,17 +21,21 @@
   <body ng-app="warzoneApp">
      <div class="row" ng-controller="retrieveUsernameController">
      <div class="container col-md-2">
-	<div class="usernamebox">
 	    <div ng-show="user">
-	    <div ng-hide="user.name">
-	    You are unknown to us, connecting from {{user.ip}}
-	    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrationModal">Register</button>
-	    </div>
+		<div class="usernamebox">
 
-	    <div ng-show="user.name">
-	    We know you as <a href="{{user.profile_url}}">{{user.name}}</a>, connecting from {{user.ip}}
-	    </div>
-	    </div>
+		    <div ng-hide="user.name">
+		    Connected from {{user.ip}}, unidentified.
+		    <div class="registerButtonContainer">
+		    <button ng-hide="user.name" class="btn btn-primary btn-lg btn-group-justified" data-toggle="modal" data-target="#registrationModal">Register</button>
+		    </div>
+		    </div>
+
+		    <div ng-show="user.name">
+		    Connected from {{user.ip}}, identified as 
+		    <a href="{{user.profile_url}}"><span class="username">{{user.name}}</span></a>
+		    </div>
+		</div>
 
 	    <div ng-hide="user">
 	    <img src="img/spinner.gif">
