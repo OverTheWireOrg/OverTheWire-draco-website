@@ -1,5 +1,11 @@
 var warzoneApp = angular.module("warzoneApp", ["ngRoute", "angularMoment"]);
 
+warzoneApp.filter('capitalizeFirst', function() {
+    return function(input, scope) {
+        return input.substring(0,1).toUpperCase()+input.substring(1);
+    }
+});
+
 function randomString(n) { //{{{
     var out = "";
     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

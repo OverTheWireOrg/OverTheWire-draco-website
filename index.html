@@ -84,7 +84,7 @@
 	<label class="btn" ng-repeat="t in accountTypes" 
 	    ng-class="{'btn-primary':account.type==t}" 
 	    ng-click="setAccountType(t)">
-		{{t}}
+		{{t | capitalizeFirst}}
 	</label>
   <p class="help-block">Client accounts are recommended for beginners, since they offer
 network-level protection. Router accounts are for advanced users not needing protection. In addition, router accounts have the ability to connect servers to the warzone.</p>
