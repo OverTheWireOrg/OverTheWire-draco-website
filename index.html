@@ -65,45 +65,42 @@
 	    <div ng-show="error">{{error}}</div>
 
 <div class="modal-body row">
-<div class="col-md-2">
-  <label class="control-label" for="textinput">Username</label>
+    <div class="col-md-2">
+      <label class="control-label">Username</label>
+    </div>
+    <div class="col-md-10">
+      <div class="controls">
+	<input type="text" placeholder="Your username..." class="form-control" ng-model="account.username" />
+	<p class="help-block">Your username identifies you on the warzone and will be used in both the VPN and warzone registry credentials.</p>
+      </div>
+    </div>
 </div>
-<div class="col-md-10">
-  <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="Your username..." class="input-xlarge roundInput" ng-model="account.username" />
-    <p class="help-block">Your username identifies you on the warzone and will be used in both the VPN and warzone registry credentials.</p>
-  </div>
-</div>
+
+<div class="modal-body row">
+    <div class="col-md-2">
+      <label class="control-label">Account type</label>
+    </div>
+    <div class="col-md-10">
+	    <label class="btn" ng-repeat="t in accountTypes" 
+		ng-class="{'btn-primary':account.type==t}" 
+		ng-click="setAccountType(t)">
+		    {{t | capitalizeFirst}}
+	    </label>
+	  <p class="help-block">Client accounts are recommended for beginners, since they offer
+	    network-level protection. Router accounts are for advanced users not needing protection.
+	    In addition, router accounts have the ability to connect servers to the warzone.</p>
+    </div>
 </div>
 
 <div class="modal-body row">
 <div class="col-md-2">
-  <label class="control-label" for="button1id">Account type</label>
+  <label class="control-label">Certificate Signing Request</label>
 </div>
 <div class="col-md-10">
-	<label class="btn" ng-repeat="t in accountTypes" 
-	    ng-class="{'btn-primary':account.type==t}" 
-	    ng-click="setAccountType(t)">
-		{{t | capitalizeFirst}}
-	</label>
-  <p class="help-block">Client accounts are recommended for beginners, since they offer
-network-level protection. Router accounts are for advanced users not needing protection. In addition, router accounts have the ability to connect servers to the warzone.</p>
-</div>
-</div>
-
-<div class="modal-body row">
-<div class="col-md-2">
-  <label class="control-label" for="textinput">Certificate Signing Request</label>
-</div>
-<div class="col-md-10">
-  <div class="controls">
-    <input id="selectCSRFile" type="file">
+    <input id="selectCSRFile" class="form-control" type="file">
     <p class="help-block">All clients and routers on the warzone authenticate using signed SSL client certificates. To sign up, you need a Certificate Signing Request (CSR) file which can be generated using the <a href="https://github.com/StevenVanAcker/OverTheWire-draco-tools">draco-tools</a>.</p>
-    <pre ng-show="account.csr">{{account.csr}}</pre>
-  </div>
 </div>
 </div>
-
 	  </div>
 	  <div class="modal-footer">
 	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
