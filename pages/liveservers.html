@@ -2,14 +2,14 @@
 <div ng-show="data">
 <h1>Live servers</h1>
 
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
 	<th>Hostname</th>
 	<th>last update</th>
     </thead>
     <tbody>
-	<tr ng-repeat="host in data">
-	    <td><a href="/#/host/{{host.name}}">{{host.name}}</a></td>
+	<tr ng-repeat="host in data" ng-click="gotoHost(host.name)" class="clickableRow">
+	    <td>{{host.name}}</td>
 	    <td><span am-time-ago="host.lastChange * 1000"></span></td>
 	</tr>
     </tbody>

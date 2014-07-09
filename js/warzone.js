@@ -147,7 +147,9 @@ warzoneApp.controller("hostpageController", ["$scope", "$routeParams", "$http", 
 //}}}
 
 var liveDataFunctionBuilder = function(type) { //{{{
-    return function($scope, $http) {
+    return function($scope, $http, $location) {
+        $scope.gotoHost = function(x) { $location.path("/host/"+x); };
+        $scope.gotoProfile = function(x) { $location.path("/profile/"+x); };
 	$http.get('/s/live/'+type).
 	    success(function(data) {
 		$scope.data = [];
@@ -159,15 +161,15 @@ var liveDataFunctionBuilder = function(type) { //{{{
 	    })
     }
 } //}}}
-warzoneApp.controller("liveserversController", ["$scope", "$http", //{{{
+warzoneApp.controller("liveserversController", ["$scope", "$http", "$location", //{{{
     liveDataFunctionBuilder("servers")
 ]);
 //}}}
-warzoneApp.controller("liveclientsController", ["$scope", "$http", //{{{
+warzoneApp.controller("liveclientsController", ["$scope", "$http", "$location", //{{{
     liveDataFunctionBuilder("clients")
 ]);
 //}}}
-warzoneApp.controller("liveroutersController", ["$scope", "$http", //{{{
+warzoneApp.controller("liveroutersController", ["$scope", "$http", "$location", //{{{
     liveDataFunctionBuilder("routers")
 ]);
 //}}}

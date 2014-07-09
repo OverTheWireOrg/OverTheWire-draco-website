@@ -110,3 +110,7 @@ body {
   border-bottom-right-radius: 6px;
 }
 
+.clickableRow {
+    cursor: hand;
+    cursor: pointer;
+}

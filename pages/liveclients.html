@@ -2,14 +2,14 @@
 <div ng-show="data">
 <h1>Live clients</h1>
 
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
         <th>Name</th>
         <th>last update</th>
     </thead>
     <tbody>
-        <tr ng-repeat="rec in data">
-            <td><a href="/#/profile/{{rec.name}}">{{rec.name}}</a></td>
+	<tr ng-repeat="rec in data" ng-click="gotoProfile(rec.name)" class="clickableRow">
+            <td>{{rec.name}}</td>
             <td><span am-time-ago="rec.lastChange * 1000"></span></td>
         </tr>
     </tbody>
