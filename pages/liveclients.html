@@ -1,9 +1,19 @@
 <div class="container col-md-9 mycontent">
 <div ng-show="data">
 <h1>Live clients</h1>
-<div ng-repeat="rec in data">
-<a href="/#/profile/{{rec.name}}">{{rec.name}}</a> <span am-time-ago="rec.lastChange * 1000"></span>
-</div>
+
+<table class="table table-striped">
+    <thead>
+        <th>Name</th>
+        <th>last update</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="rec in data">
+            <td><a href="/#/profile/{{rec.name}}">{{rec.name}}</a></td>
+            <td><span am-time-ago="rec.lastChange * 1000"></span></td>
+        </tr>
+    </tbody>
+</table>
 </div>
 
 <div ng-hide="data">
