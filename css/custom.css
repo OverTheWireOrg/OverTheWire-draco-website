@@ -111,6 +111,5 @@ body {
 }
 
 .clickableRow {
-    cursor: hand;
     cursor: pointer;
 }
