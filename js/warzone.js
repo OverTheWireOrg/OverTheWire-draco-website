@@ -101,9 +101,7 @@ warzoneApp.controller("registerController", ["$scope", "$location", "$http", fun
 		        // wait until modal is closed before going elsewhere
 			var username = $scope.account.username;
 		        $('#registrationModal').on("hidden.bs.modal", function() {
-			    console.log("Going to "+"/profile/" + username);
 			    $location.path("/profile/" + username);
-			    console.log("Done going to "+"/profile/" + username);
 			    $scope.$apply();
 			});
 		        $('#registrationModal').modal("hide");
