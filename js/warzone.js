@@ -21,6 +21,9 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
     $routeProvider
 	.when('/help', 		{ templateUrl : 'pages/help/index.html' })
 	.when('/help/account', 	{ templateUrl : 'pages/help/account.html' })
+	.when('/help/overview', { templateUrl : 'pages/help/overview.html' })
+	.when('/help/register', { templateUrl : 'pages/help/register.html' })
+	.when('/help/connecting-vulnhosts', { templateUrl : 'pages/help/connecting-vulnhosts.html' })
 	.when('/profile/:username', {
 		templateUrl : 'pages/profile.html',
 		controller  : 'profileController'

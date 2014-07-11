@@ -1,23 +1,17 @@
 <div class="container col-md-9 mycontent">
 <h1 id="draco-warzone">Draco warzone</h1>
 <p><em>This is a work in progress, that's why this documentation sucks</em></p>
-<h2 id="overview">Overview</h2>
-<div class="figure">
-<img src="/img/warzone-overview.png" alt="OverTheWire Warzone network overview" /><p class="caption">OverTheWire Warzone network overview</p>
-</div>
-<p>OverTheWire's warzone network code-named &quot;Draco&quot; allows registered users to connect to an isolated (VPN) network full of vulnerable hosts and services to practice penetration testing.</p>
-<p>Simply making client computers available on a VPN network would also makes them prone to attack. The setup currently supports two types of accounts: &quot;client&quot; accounts and &quot;server&quot; accounts.</p>
-<p>When connecting a client with a &quot;server&quot; account, a subnet with a fixed IP-range is routed towards that client. This IP-range can then be used to add vulnerable hosts to the network, fully exposing them to other clients in the warzone.</p>
-<p>Client using a &quot;safe&quot; account however, have no subnet routed towards them. In fact, the &quot;safe&quot; accounts are actively protected by a firewall which blocks all connections towards the client. This type of account can be used by inexperienced users, or users not wishing to expose vulnerable hosts on the warzone.</p>
-<h2 id="registering-an-account">Registering an account</h2>
-<p>This warzone is still under development and not open to the public yet. However, you can get an account upon request if you promise to either host some vulnerable VM, attack a hosted VM or both, and report back about your experiences. To request an account, contact Steven on OverTheWire's IRC network.</p>
-<h2 id="connecting-vulnerable-hosts">Connecting vulnerable hosts</h2>
-<p>Server accounts currently have a fixed /29 subnet routed towards them on which vulnerable hosts can be placed. The easiest way to place VMs on the warzone, is by making use of the Draco VPN router image. This VM will connect to the warzone, and route traffic between the warzone and any hosts on its internal network.</p>
-<p>The Draco VPN router is an opensource project on github and can be found here: <a href="https://github.com/StevenVanAcker/OverTheWire-draco-tools"><code class="url">https://github.com/StevenVanAcker/OverTheWire-draco-tools</code></a></p>
+<ul>
+<li><a href="/#/help/overview">Warzone overview</a></li>
+<li><a href="/#/help/account">Account types</a></li>
+<li><a href="/#/help/register">Registering an account</a></li>
+<li>Connecting to the warzone</li>
+<li><a href="/#/help/connecting-vulnhosts">Connecting vulnerable hosts</a></li>
+</ul>
 <h2 id="to-do-list">To do list</h2>
 <p>In no specific order:</p>
 <ul>
-<li>automating account creation</li>
+<li>fixing documentation</li>
 <li>adding a scoreboard</li>
 <li>vulnhost dependencies</li>
 <li>linking up multiple warzones</li>
