@@ -8,7 +8,7 @@ clients, routers and vulnerable servers.
 There are two types of accounts: clients and routers.
 
 <div class="row">
-<div class="col-md-6 autoSizeImage">
+<div class="col-md-5 autoSizeImage warzoneMargin10px warzoneRoundCorners3px warzoneBackgroundWhite50">
 Client accounts
 ---------------
 
@@ -24,7 +24,8 @@ To be on the safe side, we do advise you to connect to the warzone using a virtu
 any attacks that breach the firewall (e.g. drive-by-download) will still be contained.
 
 </div>
-<div class="col-md-6 autoSizeImage">
+<div class="col-md-1"></div>
+<div class="col-md-5 autoSizeImage warzoneMargin10px warzoneRoundCorners3px warzoneBackgroundWhite50">
 Router accounts
 ---------------
 ![](/img/router-account.png)
