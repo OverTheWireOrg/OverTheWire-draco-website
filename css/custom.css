@@ -71,6 +71,16 @@ body {
     border-radius: 20px;
 }
 
+.noticebox {
+    padding: 20px;
+    margin: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color:rgba(255,255,255,0.9);
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
 .overviewbox img {
     max-width: 100%;
     max-height: 100%;
