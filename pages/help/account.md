@@ -42,7 +42,3 @@ This IP range can be used to connect vulnerable machines to the warzone and allo
 </div>
 </div>
 
-Registering an account
-----------------------
-
-Create a CSR, pick a username
