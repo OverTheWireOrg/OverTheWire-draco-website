@@ -23,6 +23,8 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
 	.when('/help/account', 	{ templateUrl : 'pages/help/account.html' })
 	.when('/help/overview', { templateUrl : 'pages/help/overview.html' })
 	.when('/help/register', { templateUrl : 'pages/help/register.html' })
+	.when('/help/configure-browser', { templateUrl : 'pages/help/configure-browser.html' })
+	.when('/help/configure-openvpn', { templateUrl : 'pages/help/configure-openvpn.html' })
 	.when('/help/connecting-vulnhosts', { templateUrl : 'pages/help/connecting-vulnhosts.html' })
 	.when('/profile/:username', {
 		templateUrl : 'pages/profile.html',

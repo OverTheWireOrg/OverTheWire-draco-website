@@ -25,4 +25,5 @@ password' setup.
    listed on your profile page. This configuration tarball can be combined with your private
    key using the [consume-client-credentials.sh scripts](https://github.com/StevenVanAcker/OverTheWire-draco-tools/blob/master/consume-client-credentials.sh) from the [Draco tools](https://github.com/StevenVanAcker/OverTheWire-draco-tools).
 
-6. Now that you have the correct files, continue to configure your browser and OpenVPN clients.
+6. Now that you have the correct files, continue to [configure your browser](/#/help/configure-browser) and [configure your OpenVPN client](/#/help/configure-openvpn).
+

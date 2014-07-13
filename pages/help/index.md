@@ -6,7 +6,8 @@ Draco warzone
 * [Warzone overview](/#/help/overview)
 * [Account types](/#/help/account)
 * [Registering an account](/#/help/register)
-* Connecting to the warzone
+* [Configuring your browser](/#/help/configure-browser)
+* [Configuring your OpenVPN client](/#/help/configure-openvpn)
 * [Connecting vulnerable hosts](/#/help/connecting-vulnhosts)
 
 To do list
