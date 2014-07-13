@@ -16,7 +16,6 @@ password' setup.
 3. Click on the "Register" button on the left of this website. In the popup form,
    fill in a username, select an [account type](/#/help/account) and select the CSR file you just
    created: ```user.csr```. Then submit the form.
-   <div class="autoSizeImage">![](/img/screenshot-register-form.png)</div>
 
 4. After registering, you will be redirected to your profile page. Registering an account involves
    signing your CSR, which may take some time. You can monitor the state of the registration

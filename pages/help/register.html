@@ -5,11 +5,7 @@
 <li><p>Generate a private key and Certificate Signing Request (CSR). The following shell command will generate a key <code>user.key</code> and CSR <code>user.csr</code> in the current working directory.</p>
 <pre><code>openssl req -new -newkey rsa:2048 -nodes -out user.csr -keyout user.key -subj &quot;/&quot;</code></pre></li>
 <li><p>Store your private key <code>user.key</code> in a safe place. <strong>Never give your private key to anyone!</strong></p></li>
-<li>Click on the &quot;Register&quot; button on the left of this website. In the popup form, fill in a username, select an <a href="/#/help/account">account type</a> and select the CSR file you just created: <code>user.csr</code>. Then submit the form.
-<div class="autoSizeImage">
-<img src="/img/screenshot-register-form.png" />
-</div>
-</li>
+<li><p>Click on the &quot;Register&quot; button on the left of this website. In the popup form, fill in a username, select an <a href="/#/help/account">account type</a> and select the CSR file you just created: <code>user.csr</code>. Then submit the form.</p></li>
 <li><p>After registering, you will be redirected to your profile page. Registering an account involves signing your CSR, which may take some time. You can monitor the state of the registration process on your profile page.</p></li>
 <li><p>When your account is approved, you can go ahead and download your configuration tarball listed on your profile page. This configuration tarball can be combined with your private key using the <a href="https://github.com/StevenVanAcker/OverTheWire-draco-tools/blob/master/consume-client-credentials.sh">consume-client-credentials.sh scripts</a> from the <a href="https://github.com/StevenVanAcker/OverTheWire-draco-tools">Draco tools</a>.</p></li>
 <li><p>Now that you have the correct files, continue to configure your browser and OpenVPN clients.</p></li>
