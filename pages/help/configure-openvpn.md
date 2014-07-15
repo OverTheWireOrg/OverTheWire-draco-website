@@ -1,8 +1,19 @@
 Configuring the OpenVPN client
 ==============================
 
-Following [account registration](/#/help/register), you can now download the configuration tarball
-from your profile page. This configuration tarball contains a signed certificate and several other files
-which, together with your private key, can be used to authenticate yourself to the OpenVPN server.
+Continuing from the [browser configuration](/#/help/configure-browser), you should have a file
+called ```<username>-openvpn.tar.gz```. This file holds all the configuration files for OpenVPN.
+After you've installed an OpenVPN client, you can unpack this tarball in ```/etc/openvpn```
+with ```tar -xf <username>-openvpn.tar.gz```.
 
-More information to follow...
+Starting the OpenVPN client
+---------------------------
+
+The process of starting the OpenVPN client is again dependent on the particular client software.
+
+Ensuring that it works
+----------------------
+
+Once you are connected to the warzone through OpenVPN, you should be able to ping ```172.27.0.1``` and
+connect with it through a browser. This IP address is the internal address of the external website.
+
