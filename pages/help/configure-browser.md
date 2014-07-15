@@ -1,3 +1,9 @@
+<div class="row">
+<div class="col-md-4">[&#8592; Registering an account](/#/help/register)</div>
+<div class="col-md-4">[&#8593; Overview](/#/help)</div>
+<div class="col-md-4">[Configuring your OpenVPN client &#8594;](/#/help/configure-openvpn)</div>
+</div>
+
 Configuring the browser
 =======================
 

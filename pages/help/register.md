@@ -1,3 +1,9 @@
+<div class="row">
+<div class="col-md-4">[&#8592; Account types](/#/help/account)</div>
+<div class="col-md-4">[&#8593; Overview](/#/help)</div>
+<div class="col-md-4">[Configuring your browser &#8594;](/#/help/configure-browser)</div>
+</div>
+
 Registering an account
 ======================
 

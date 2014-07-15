@@ -1,3 +1,9 @@
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">[&#8593; Overview](/#/help)</div>
+<div class="col-md-4">[Registering an account &#8594;](/#/help/register)</div>
+</div>
+
 Warzone account
 ===============
 

@@ -1,3 +1,8 @@
+<div class="row">
+<div class="col-md-4">[&#8592; Configuring your browser](/#/help/configure-browser)</div>
+<div class="col-md-4">[&#8593; Overview](/#/help)</div>
+<div class="col-md-4">[Connecting vulnerable hosts &#8594;](/#/help/connecting-vulnhosts)</div>
+</div>
 Configuring the OpenVPN client
 ==============================
 

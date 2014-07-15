@@ -1,3 +1,9 @@
+<div class="row">
+<div class="col-md-4">[&#8592; Configuring your OpenVPN client](/#/help/configure-openvpn)</div>
+<div class="col-md-4">[&#8593; Overview](/#/help)</div>
+<div class="col-md-4"></div>
+</div>
+
 Connecting vulnerable hosts
 ===========================
 
