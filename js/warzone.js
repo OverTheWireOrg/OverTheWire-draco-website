@@ -159,7 +159,7 @@ var liveDataFunctionBuilder = function(type) { //{{{
 	    success(function(data) {
 		$scope.data = [];
 		for(var i in data.items) {
-		    $scope.data.push({"name": i, "lastChange": data.items[i].lastChange})
+		    $scope.data.push({"name": i, "lastChange": data.items[i].lastChange, "data": data.items[i]})
 		}
 
 		$scope.data.sort(function(a, b) {return b.lastChange - a.lastChange})

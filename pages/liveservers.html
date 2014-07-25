@@ -5,11 +5,15 @@
 <table class="table table-hover">
     <thead>
 	<th>Hostname</th>
+	<th>Title</th>
+	<th>Router</th>
 	<th>last update</th>
     </thead>
     <tbody>
 	<tr ng-repeat="host in data" ng-click="gotoHost(host.name)" class="clickableRow">
 	    <td>{{host.name}}</td>
+	    <td>{{host.data['title']}}</td>
+	    <td><a href="/#/profile/{{host.data['owner']}}">{{host.data['owner']}}</a></td>
 	    <td><span am-time-ago="host.lastChange * 1000"></span></td>
 	</tr>
     </tbody>
