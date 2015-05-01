@@ -101,8 +101,11 @@ warzoneApp.controller("profileController", ["$scope", "$routeParams", "$http", /
 	}
 ]);
 //}}}
-warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", //{{{
-	function($scope, $http) {
+warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window", //{{{
+	function($scope, $http, $window) {
+	  $window.addEventListener('message', function(e) {
+	      console.log(e.data);
+	  });
 	  $http.get('/s/whoami').
 	    success(function(data) {
 	      data.profile_url = "/#/profile/"+data.name;
@@ -111,3 +114,4 @@ warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", //{{{
 	}
 ]);
 //}}}
+
