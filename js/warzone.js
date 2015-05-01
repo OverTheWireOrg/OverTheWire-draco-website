@@ -30,36 +30,7 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
 		templateUrl : 'pages/profile.html',
 		controller  : 'profileController'
 	})
-	.when('/host/:host', {
-		templateUrl : 'pages/hostpage.html',
-		controller  : 'hostpageController'
-	})
-	.when('/stats', {
-		templateUrl : 'pages/stats.html',
-		controller  : 'statsController'
-	})
-	.when('/liveservers', {
-		templateUrl : 'pages/liveservers.html',
-		controller  : 'liveserversController'
-	})
-	.when('/liveclients', {
-		templateUrl : 'pages/liveclients.html',
-		controller  : 'liveclientsController'
-	})
-	.when('/liverouters', {
-		templateUrl : 'pages/liverouters.html',
-		controller  : 'liveroutersController'
-	})
-	.when('/overview', {
-		templateUrl : 'pages/overview.html',
-		controller  : 'overviewController'
-	})
 	.otherwise({ redirectTo: '/overview' });
-}]);
-//}}}
-warzoneApp.controller("statsController", ["$scope", function($scope) { //{{{
-    renderFullStats();
-    renderTodayStats();
 }]);
 //}}}
 warzoneApp.controller("registerController", ["$scope", "$location", "$http", function($scope, $location, $http) { //{{{
@@ -137,58 +108,6 @@ warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", //{{{
 	      data.profile_url = "/#/profile/"+data.name;
 	      $scope.user = data;
 	    })
-	}
-]);
-//}}}
-warzoneApp.controller("hostpageController", ["$scope", "$routeParams", "$http", "$sce", //{{{
-	function($scope, $routeParams, $http, $sce) {
-	    $http.get('/s/host/' + $routeParams.host).
-		success(function(data) {
-		    $scope.data = data;
-		    $scope.body = $sce.trustAsHtml(data.body);
-		})
-	}
-]);
-//}}}
-
-var liveDataFunctionBuilder = function(type) { //{{{
-    return function($scope, $http, $location) {
-        $scope.gotoHost = function(x) { $location.path("/host/"+x); };
-        $scope.gotoProfile = function(x) { $location.path("/profile/"+x); };
-	$http.get('/s/live/'+type).
-	    success(function(data) {
-		$scope.data = [];
-		for(var i in data.items) {
-		    $scope.data.push({"name": i, "lastChange": data.items[i].lastChange, "data": data.items[i]})
-		}
-
-		$scope.data.sort(function(a, b) {return b.lastChange - a.lastChange})
-	    })
-    }
-} //}}}
-warzoneApp.controller("liveserversController", ["$scope", "$http", "$location", //{{{
-    liveDataFunctionBuilder("servers")
-]);
-//}}}
-warzoneApp.controller("liveclientsController", ["$scope", "$http", "$location", //{{{
-    liveDataFunctionBuilder("clients")
-]);
-//}}}
-warzoneApp.controller("liveroutersController", ["$scope", "$http", "$location", //{{{
-    liveDataFunctionBuilder("routers")
-]);
-//}}}
-warzoneApp.controller("overviewController", ["$scope", "$http", "$interval", //{{{
-	function($scope, $http, $interval) {
- 	    var getOnce = function() {
-		$http.get('/s/statistics/latest.json').
-		    success(function(data) {
-			$scope.stats = data["stats"];
-		    })
-	    }
-	    var intervalPromise = $interval(getOnce, 60000);      
-	    getOnce();
-	    $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
 	}
 ]);
 //}}}
