@@ -95,7 +95,7 @@ warzoneApp.controller("profileController", ["$scope", "$routeParams", "$http", /
 	function($scope, $routeParams, $http) {
 	    $http.get('/s/profile/' + $routeParams.username).
 		success(function(data) {
-		    data.tarball_url = "/s/tarball/"+data.name;
+		    data.cert_url = "/s/cert/"+data.name;
 		    $scope.data = data;
 		})
 	}

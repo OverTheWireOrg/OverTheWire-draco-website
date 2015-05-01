@@ -17,10 +17,7 @@ Account-type: {{data.type}}
 Account status: {{data.status}}
 Last operation: {{data.lastOperation}}
 Last operation change: <span am-time-ago="data.lastOperationChange * 1000"></span>
-Configuration tarball: <a href="{{data.tarball_url}}">{{data.name}}.tar.gz</a>
-<div ng-show="data.type == 'router'">
-Allocated IP range: {{data.network}}/{{data.cidr}}
-</div>
+Certificate: <a href="{{data.cert_url}}">install</a>
 </pre>
 </div>
 
