@@ -101,10 +101,16 @@ warzoneApp.controller("profileController", ["$scope", "$routeParams", "$http", /
 	}
 ]);
 //}}}
-warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window", //{{{
-	function($scope, $http, $window) {
+warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window", "$location", //{{{
+	function($scope, $http, $window, $location) {
 	  $window.addEventListener('message', function(e) {
 	      console.log(e.data);
+	      var username = e.data.username;
+	      $('#registrationModal').on("hidden.bs.modal", function() {
+                            $location.path("/profile/" + username);
+                            $scope.$apply();
+                        });
+	      $('#registrationModal').modal("hide");
 	  });
 	  $http.get('/s/whoami').
 	    success(function(data) {
