@@ -140,3 +140,12 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 	}
 ]);
 //}}}
+warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$location", //{{{
+    function($scope, $http, $window, $location) {
+      $scope.data = {
+	  "roles": [ "lala" ]
+      };
+      $scope.lala = function() { alert(1); };
+    }
+]);
+//}}}
