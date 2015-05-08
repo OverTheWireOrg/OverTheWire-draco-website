@@ -30,6 +30,10 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
 		templateUrl : 'pages/profile.html',
 		controller  : 'profileController'
 	})
+	.when('/keys', {
+		templateUrl : 'pages/keys.html',
+		controller  : 'KeysController'
+	})
 	.otherwise({ redirectTo: '/overview' });
 }]);
 //}}}
@@ -121,3 +125,18 @@ warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window
 ]);
 //}}}
 
+warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$location", //{{{
+	function($scope, $http, $window, $location) {
+	  $http.get('/s/whoami').
+	    success(function(data) {
+	      $scope.data = {
+	          "keys": {
+		  	"blabla": { "spkac": "THIS_IS_SPKAC", "role": "role1" },
+		  	"otherbla": { "spkac": "THIS_IS_SPKAC2", "role": "role2" },
+		  },
+		  "roles": [ "role1", "role2", "role3", "role4" ]
+	      };
+	    })
+	}
+]);
+//}}}

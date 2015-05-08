@@ -1,0 +1,51 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="data">
+    <h1>Your subkeys</h1>
+
+    <div class="container">
+      <div class="row clearfix">
+	<div class="col-md-6 column">
+	  <div class="panel-group" id="panel-keys">
+
+
+	    <div class="panel panel-default" ng-repeat="(key, value) in data.keys">
+	      <div class="panel-heading">
+		 <div class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-keys" href="#key-details-{{key}}">
+		    <div class="row">
+		      <div class="col-xs-2">
+			<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': true}"></i>
+		      </div>
+		      <div class="col-xs-5">{{key}}</div>
+		      <div class="col-xs-5">[{{value.role}}]</div>
+		    </div>
+		 </div>
+	      </div>
+	      <div id="key-details-{{key}}" class="panel-collapse collapse">
+		<div class="panel-body">
+		  SPKAC: {{value.spkac}}
+		</div>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+      </div>
+
+      <div class="row clearfix">
+	<div class="col-md-6 column">
+	    <h2>Add new key</h2>
+
+	</div>
+      </div>
+
+    </div>
+
+
+</div>
+
+<div ng-hide="data">
+    <img src="img/spinner.gif">
+</div>
+</div>
+
+
