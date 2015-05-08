@@ -37,64 +37,6 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
 	.otherwise({ redirectTo: '/overview' });
 }]);
 //}}}
-warzoneApp.controller("registerController", ["$scope", "$location", "$http", function($scope, $location, $http) { //{{{
-    $scope.accountTypes = ["client", "router"];
-    $scope.account = {};
-    $scope.account.type = "client";
-    $scope.setAccountType = function(x) {
-	$scope.account.type = x;
-    };
-    $scope.updateCSR = function() {
-	var file = $("#selectCSRFile").get(0).files[0];
-	var reader = new FileReader();
-
-	reader.onload = function(e) {
-	    var filecontent = reader.result;
-	    if(filecontent.indexOf("-----BEGIN CERTIFICATE REQUEST-----") == 0) {
-		$scope.account.csr = filecontent;
-		$scope.error = "This file looks like a CSR";
-	    } else {
-		$scope.account.csr = "";
-		$scope.error = "This file is not a CSR";
-	    }
-	    // since we're going through jQuery, we need to notify AngularJS that something changed while it wasn't looking
-	    $scope.$apply();
-	}
-
-	reader.readAsText(file);  
-    };
-    // this is a dirty hack to trigger an update when a (new) file is selected. AngularJS doesn't support onChange for
-    // inputs of type "file" yet, so using jQuery to register a handler
-    $('#registrationModal').on('shown.bs.modal', function (e) {
-	$("#selectCSRFile").change($scope.updateCSR);
-    });
-    $scope.register = function(x) { 
-	    var token = randomString(32);
-	    $http.post('/s/register', {
-	    		"username": $scope.account.username, 
-			"type": $scope.account.type, 
-			"csr": $scope.account.csr,
-			"CSRFToken": token,
-			}, {headers: {'X-CSRF-Token': token}})
-		.success(function(data) {
-		    if(data.success) {
-		        // wait until modal is closed before going elsewhere
-			var username = $scope.account.username;
-		        $('#registrationModal').on("hidden.bs.modal", function() {
-			    $location.path("/profile/" + username);
-			    $scope.$apply();
-			});
-		        $('#registrationModal').modal("hide");
-		    } else {
-			$scope.error = data.msg;
-		    }
-		})
-		.error(function(data) {
-		    alert("error");
-		})
-    };
-}]);
-//}}}
 warzoneApp.controller("profileController", ["$scope", "$routeParams", "$http", //{{{
 	function($scope, $routeParams, $http) {
 	    $http.get('/s/profile/' + $routeParams.username).
@@ -141,11 +83,63 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 ]);
 //}}}
 warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$location", //{{{
-    function($scope, $http, $window, $location) {
-      $scope.data = {
-	  "roles": [ "lala" ]
-      };
-      $scope.lala = function() { alert(1); };
-    }
-]);
+  function($scope, $http, $window, $location) {
+    $scope.data = {
+	"roles": [ "lala" ]
+    };
+    $scope.lala = function() { alert(1); };
+    $scope.setAlert = function(t, m) {
+        if(t == "") {
+	    delete $scope.alerttype;
+	    delete $scope.alertmsg;
+	} else {
+	    $scope.alerttype = "alert-" + t;
+	    $scope.alertmsg = m;
+	}
+    };
+    $scope.setAlert("","");
+    $scope.updateSPKAC = function() {
+	var file = $("#selectSPKACFile").get(0).files[0];
+	var reader = new FileReader();
+
+	reader.onload = function(e) {
+	    var filecontent = reader.result;
+	    if(filecontent.indexOf("SPKAC=") == 0) {
+		$scope.spkac = filecontent;
+		$scope.setAlert("success", "This file looks like a SPKAC");
+	    } else {
+		$scope.spkac = "";
+		$scope.setAlert("danger", "This file is not a SPKAC");
+	    }
+	    // since we're going through jQuery, we need to notify AngularJS that something changed while it wasn't looking
+	    $scope.$apply();
+	}
+
+	reader.readAsText(file);  
+    };
+    // this is a dirty hack to trigger an update when a (new) file is selected. AngularJS doesn't support onChange for
+    // inputs of type "file" yet, so using jQuery to register a handler
+    $('#addKeyModal').on('shown.bs.modal', function (e) {
+	$("#selectSPKACFile").change($scope.updateSPKAC);
+    });
+    $scope.addKey = function() { 
+	    var token = randomString(32);
+	    $http.post('/s/addkey', {
+	    		"name": $scope.subkeyname, 
+			"role": $scope.subkeyrole, 
+			"spkac": $scope.spkac,
+			"CSRFToken": token,
+			}, {headers: {'X-CSRF-Token': token}})
+		.success(function(data) {
+		    if(data.success) {
+		        $('#addKeyModal').modal("hide");
+		    } else {
+			$scope.setAlert("danger", data.msg);;
+		    }
+		})
+		.error(function(data) {
+		    alert("error");
+		})
+    };
+}]);
 //}}}

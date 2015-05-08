@@ -48,63 +48,71 @@
 </div>
 
 
-    <div class="modal fade" id="addKeyModal" tabindex="-1" role="dialog" aria-labelledby="addKeyModalLabel" aria-hidden="true" ng-controller="AddKeyController">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="addKeyModalLabel">Add key</h4>
-          </div>
-          <div class="modal-body">
-		<div class="row">
-		    <div class="col-md-2">
-		      <label class="control-label">Subkey name</label>
-		    </div>
-		    <div class="col-md-10">
-		      <div class="controls">
-			<input name="subkeyname" type="text" placeholder="Subkey name..." class="form-control" />
-			<p class="help-block">An identifier for this subkey.</p>
-		      </div>
-		    </div>
-		</div>
+<div class="modal fade" id="addKeyModal" tabindex="-1" role="dialog" aria-labelledby="addKeyModalLabel" aria-hidden="true" ng-controller="AddKeyController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	<h4 class="modal-title" id="addKeyModalLabel">Add key</h4>
+      </div>
+      
 
-		<div class="row">
-		    <div class="col-md-2">
-		      <label class="control-label">Subkey role</label>
-		    </div>
-		    <div class="col-md-10">
-		      <div class="controls">
-			<select name="subkeyname" class="form-control">
-			    <option value="one">One</option>
-			    <option value="two">Two</option>
-			    <option value="three">Three</option>
-			    <option value="four">Four</option>
-			    <option value="five">Five</option>
-			</select>
-			<p class="help-block">Access role to assign to this key.</p>
-		      </div>
-		    </div>
-		</div>
+      <div ng-show="alerttype" class="alert" ng-class="alerttype" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<span class="sr-only">Error:</span>
+	  {{alertmsg}}
+      </div>
 
-		<div class="row">
-		    <div class="col-md-2">
-		      <label class="control-label">SPKAC file</label>
-		    </div>
-		    <div class="col-md-10">
-			  <input type="file">
-			  <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key. A private key and accompanying SPKAC file can be generated usign the following OpenSSL commands:
-			  <pre>openssl genrsa -out privkey.pem 2048
+      <div class="modal-body">
+	    <div class="row">
+		<div class="col-md-2">
+		  <label class="control-label">Subkey name</label>
+		</div>
+		<div class="col-md-10">
+		  <div class="controls">
+		    <input name="subkeyname" type="text" placeholder="Subkey name..." class="form-control" ng-model="subkeyname" />
+		    <p class="help-block">An identifier for this subkey.</p>
+		  </div>
+		</div>
+	    </div>
+
+	    <div class="row">
+		<div class="col-md-2">
+		  <label class="control-label">Subkey role</label>
+		</div>
+		<div class="col-md-10">
+		  <div class="controls">
+		    <select name="subkeyrole" class="form-control" ng-model="subkeyrole">
+			<option value="one">One</option>
+			<option value="two">Two</option>
+			<option value="three">Three</option>
+			<option value="four">Four</option>
+			<option value="five">Five</option>
+		    </select>
+		    <p class="help-block">Access role to assign to this key.</p>
+		  </div>
+		</div>
+	    </div>
+
+	    <div class="row">
+		<div class="col-md-2">
+		  <label class="control-label">SPKAC file</label>
+		</div>
+		<div class="col-md-10">
+		      <input id="selectSPKACFile" class="form-control" type="file">
+		      <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key. A private key and accompanying SPKAC file can be generated usign the following OpenSSL commands:
+		      <pre>openssl genrsa -out privkey.pem 2048
 openssl spkac -key privkey.pem -out spkac.cnf</p>
-		    </div>
 		</div>
-		<div class="footer">
-		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		    <button type="button" class="btn btn-primary" ng-click="lala(1)">Add key</button>
-		</div>
-          </div>
-        </div>
+	    </div>
+	    <div class="footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary" ng-click="addKey()">Add key</button>
+	    </div>
       </div>
     </div>
+  </div>
+</div>
 
 
 
