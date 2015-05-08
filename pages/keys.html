@@ -33,8 +33,7 @@
 
       <div class="row clearfix">
 	<div class="col-md-6 column">
-	    <h2>Add new key</h2>
-
+	    <button class="btn btn-primary btn-lg btn-group-justified" data-toggle="modal" data-target="#addKeyModal">Add key</button>
 	</div>
       </div>
 
@@ -49,3 +48,16 @@
 </div>
 
 
+    <div class="modal fade" id="addKeyModal" tabindex="-1" role="dialog" aria-labelledby="addKeyModalLabel" aria-hidden="true" ng-controller="addKeyController">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="addKeyModalLabel">Add key</h4>
+          </div>
+          <div class="modal-body">
+	      yes
+          </div>
+        </div>
+      </div>
+    </div>
