@@ -26,10 +26,25 @@
 			  <div ng-repeat="(resource, permlist) in rolerec">
 			    <div class="row" ng-repeat="perm in permlist">
 			      <div class="col-xs-4">{{perm}}</div>
-			      <div class="col-xs-7">{{resource}}</div>
-			      <div class="col-xs-1"><i class="pull-left glyphicon" ng-class="{'glyphicon-remove': true}" ng-click="revokePermission(rolename, category, resource, perm)"></i></div>
+			      <div class="col-xs-6">{{resource}}</div>
+			      <div class="col-xs-2"><i class="pull-left glyphicon" ng-class="{'glyphicon-remove': true}" ng-click="revokePermission(rolename, category, resource, perm)"></i></div>
 			    </div>
 			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-xs-4">
+			    <select class="form-control" ng-model="actionToAdd" ng-hide="!resourceToAdd">
+			      <option value=""></option>
+			      <option ng-repeat="i in getActionList(resourceToAdd)" value="{{i}}">{{i}}</option>
+			    </select>
+			  </div>
+			  <div class="col-xs-5">
+			    <select class="form-control" ng-model="resourceToAdd">
+			      <option value=""></option>
+			      <option ng-repeat="i in getResourceList()" value="{{i}}">{{i}}</option>
+			    </select>
+			  </div>
+			  <div class="col-xs-3"><button class="btn btn-primary btn-sm btn-group-justified">Add</button></div>
 			</div>
 		      </div>
 		    </div>

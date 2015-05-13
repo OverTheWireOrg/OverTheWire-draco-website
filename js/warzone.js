@@ -146,6 +146,27 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 //}}}
 warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
+	  $scope.getResourceList = function() {
+	      var out = [];
+	      var categories = Object.keys($scope.data.resources);
+	      for(var cat in categories) {
+	          var rlist = Object.keys($scope.data.resources[categories[cat]]);
+		  out.push.apply(out, rlist);
+	      }
+	      return out;
+	  };
+	  $scope.getActionList = function(a) {
+	      var categories = Object.keys($scope.data.resources);
+	      for(var cat in categories) {
+	          var rlist = Object.keys($scope.data.resources[categories[cat]]);
+
+		  if(rlist.indexOf(a) >= 0) {
+		      
+		      return $scope.data.actions[categories[cat]];
+		  }
+	      }
+	      return [];
+	  };
 	  $scope.revokePermission = function(role,category,resource,permission) {
 	      var arr = $scope.data["roles"][role][category][resource];
 	      var i = arr.indexOf(permission);
