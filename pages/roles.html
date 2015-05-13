@@ -27,7 +27,7 @@
 			    <div class="row" ng-repeat="perm in permlist">
 			      <div class="col-xs-4">{{perm}}</div>
 			      <div class="col-xs-7">{{resource}}</div>
-			      <div class="col-xs-1"><i class="pull-left glyphicon" ng-class="{'glyphicon-remove': true}"></i></div>
+			      <div class="col-xs-1"><i class="pull-left glyphicon" ng-class="{'glyphicon-remove': true}" ng-click="revokePermission(rolename, category, resource, perm)"></i></div>
 			    </div>
 			  </div>
 			</div>
