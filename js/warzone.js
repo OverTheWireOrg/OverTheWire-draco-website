@@ -34,6 +34,10 @@ warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
 		templateUrl : 'pages/keys.html',
 		controller  : 'KeysController'
 	})
+	.when('/roles', {
+		templateUrl : 'pages/roles.html',
+		controller  : 'RolesController'
+	})
 	.otherwise({ redirectTo: '/overview' });
 }]);
 //}}}
@@ -139,4 +143,43 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 		})
     };
 }]);
+//}}}
+warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
+	function($scope, $http, $window, $location) {
+	  $http.get('/s/keys').
+	    success(function(data) {
+	      $scope.data = {
+	      	"resources": {
+			"boobies url": { "own boobies urls": []},
+			"boobies tag": {"own boobies tags": [], "tag1": ["own boobies tags"], "tag2": ["own boobies tags"]}, 
+			"vpn ip": {"1.2.3.4": ["own vpn ips"], "own vpn ips": [], "3.1.1.7": ["own vpn ips"]}
+			}, 
+		"actions": {
+			"boobies url": ["view", "delete"], 
+			"boobies tag": ["add", "delete"], 
+			"vpn ip": ["connect"]
+			}, 
+		"roles": {
+			    "all": {
+				    "vpn ip": {
+				    	"own vpn ips": ["connect"]
+				    },
+				    "boobies url": {
+				    	"own boobies urls": ["view", "delete"],
+				    },
+				    "boobies tag": {
+				    	"own boobies tags": ["add", "delete"],
+				    }
+			    },
+			    "VPN-all": {
+				    "vpn ip": {"own vpn ips": ["connect"]}
+			    }, 
+			    "VPN1": {
+				    "vpn ip": {"1.2.3.4": ["connect"]}
+			    }, 
+			}
+		};
+	    })
+	}
+]);
 //}}}

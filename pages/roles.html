@@ -1,0 +1,57 @@
+<div class="container col-md-9 mycontent">
+<div ng-show="data">
+    <h1>Your roles</h1>
+
+    <div class="container">
+      <div class="row clearfix">
+	<div class="col-md-6 column">
+	  <div class="panel-group" id="panel-roles">
+	    <div class="panel panel-default" ng-repeat="(rolename, catrec) in data.roles">
+	      <div class="panel-heading">
+		 <div class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-roles" href="#role-details-{{rolename}}">
+		    <div class="row">
+		      <div class="col-xs-1">
+			<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': true}"></i>
+		      </div>
+		      <div class="col-xs-10">{{rolename}}</div>
+		    </div>
+		 </div>
+	      </div>
+	      <div id="role-details-{{rolename}}" class="panel-collapse collapse">
+		<div class="panel-body">
+		    <div class="row">
+		      <div class="col-xs-4 vertical-center">User of this role can... </div>
+		      <div class="col-xs-8">
+		        <div ng-repeat="(category, rolerec) in catrec">
+			  <div ng-repeat="(resource, permlist) in rolerec">
+			    <div class="row" ng-repeat="perm in permlist">
+			      <div class="col-xs-4">{{perm}}</div>
+			      <div class="col-xs-7">{{resource}}</div>
+			      <div class="col-xs-1"><i class="pull-left glyphicon" ng-class="{'glyphicon-remove': true}"></i></div>
+			    </div>
+			  </div>
+			</div>
+		      </div>
+		    </div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <div class="row clearfix">
+	<div class="col-md-6 column">
+	    <button class="btn btn-primary btn-lg btn-group-justified" data-toggle="modal" data-target="#addRoleModal">Add role</button>
+	</div>
+      </div>
+    </div>
+
+
+</div>
+
+<div ng-hide="data">
+    <img src="img/spinner.gif">
+</div>
+</div>
+
+
