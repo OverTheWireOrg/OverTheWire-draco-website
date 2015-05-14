@@ -147,11 +147,12 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
 	  $scope.getResourceList = function() {
-	      var out = [];
+	      var out = {};
 	      var categories = Object.keys($scope.data.resources);
 	      for(var cat in categories) {
-	          var rlist = Object.keys($scope.data.resources[categories[cat]]);
-		  out.push.apply(out, rlist);
+		  for(var r in $scope.data.resources[categories[cat]]) {
+		      out[r] = cat;
+		  }
 	      }
 	      return out;
 	  };
@@ -171,6 +172,27 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	      var arr = $scope.data["roles"][role][category][resource];
 	      var i = arr.indexOf(permission);
 	      arr.splice(i, 1);
+	  };
+	  $scope.addPermission = function(role,resource,permission) {
+	      var rdict = $scope.getResourceList();
+	      if(!(resource in rdict)) return;
+
+	      var category = rdict[resource];
+	      var x = $scope.data;
+
+	      if(!("roles" in x)) { x["roles"] = {}; }
+	      x = x["roles"];
+	      if(!(role in x)) { x[role] = {}; }
+	      x = x[role];
+	      if(!(category in x)) { x[category] = {}; }
+	      x = x[category];
+	      if(!(resource in x)) { x[resource] = []; }
+	      x = x[resource];
+
+	      var i = x.indexOf(permission);
+	      if(i == -1) {
+		  x.push(permission);
+	      }
 	  };
 	  $http.get('/s/keys').
 	    success(function(data) {

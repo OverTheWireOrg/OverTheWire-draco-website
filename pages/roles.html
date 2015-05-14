@@ -39,12 +39,12 @@
 			    </select>
 			  </div>
 			  <div class="col-xs-5">
-			    <select class="form-control" ng-model="resourceToAdd">
+			    <select class="form-control" ng-model="resourceToAdd" ng-change="actionToAdd=''">
 			      <option value=""></option>
-			      <option ng-repeat="i in getResourceList()" value="{{i}}">{{i}}</option>
+			      <option ng-repeat="(i, xxx) in getResourceList()" value="{{i}}">{{i}}</option>
 			    </select>
 			  </div>
-			  <div class="col-xs-3"><button class="btn btn-primary btn-sm btn-group-justified">Add</button></div>
+			  <div class="col-xs-3"><button class="btn btn-primary btn-sm btn-group-justified" data-ng-disabled="!resourceToAdd || !actionToAdd" ng-click="addPermission(rolename, resourceToAdd, actionToAdd)">Add</button></div>
 			</div>
 		      </div>
 		    </div>
