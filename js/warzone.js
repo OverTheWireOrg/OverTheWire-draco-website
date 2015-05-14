@@ -54,7 +54,6 @@ warzoneApp.controller("profileController", ["$scope", "$routeParams", "$http", /
 warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
 	  $window.addEventListener('message', function(e) {
-	      console.log(e.data);
 	      var username = e.data.username;
 	      $('#registrationModal').on("hidden.bs.modal", function() {
                             $location.path("/profile/" + username);
@@ -148,30 +147,21 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	function($scope, $http, $window, $location) {
 	  $scope.getResourceList = function() {
 	      var out = {};
-	      var categories = Object.keys($scope.data.resources);
-	      for(var cat in categories) {
-		  for(var r in $scope.data.resources[categories[cat]]) {
+	      for(var cat in $scope.data.resources) {
+		  for(var r in $scope.data.resources[cat]) {
 		      out[r] = cat;
 		  }
 	      }
 	      return out;
 	  };
-	  $scope.getActionList = function(a) {
-	      var categories = Object.keys($scope.data.resources);
-	      for(var cat in categories) {
-	          var rlist = Object.keys($scope.data.resources[categories[cat]]);
-
-		  if(rlist.indexOf(a) >= 0) {
-		      
-		      return $scope.data.actions[categories[cat]];
-		  }
-	      }
-	      return [];
+	  $scope.getActionList = function(r) {
+	      var rdict = $scope.getResourceList();
+	      if(!(r in rdict)) [];
+	      var cat = rdict[r];
+	      return $scope.data.actions[cat];
 	  };
 	  $scope.revokePermission = function(role,category,resource,permission) {
-	      var arr = $scope.data["roles"][role][category][resource];
-	      var i = arr.indexOf(permission);
-	      arr.splice(i, 1);
+	      delete $scope.data["roles"][role][category][resource][permission];
 	  };
 	  $scope.addPermission = function(role,resource,permission) {
 	      var rdict = $scope.getResourceList();
@@ -186,13 +176,10 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	      x = x[role];
 	      if(!(category in x)) { x[category] = {}; }
 	      x = x[category];
-	      if(!(resource in x)) { x[resource] = []; }
+	      if(!(resource in x)) { x[resource] = {}; }
 	      x = x[resource];
 
-	      var i = x.indexOf(permission);
-	      if(i == -1) {
-		  x.push(permission);
-	      }
+	      x[permission] = 1
 	  };
 	  $http.get('/s/keys').
 	    success(function(data) {
@@ -203,27 +190,27 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 			"vpn ip": {"1.2.3.4": ["own vpn ips"], "own vpn ips": [], "3.1.1.7": ["own vpn ips"]}
 			}, 
 		"actions": {
-			"boobies url": ["view", "delete"], 
-			"boobies tag": ["add", "delete"], 
-			"vpn ip": ["connect"]
+			"boobies url": { "view": 1, "delete": 1}, 
+			"boobies tag": { "add": 1, "delete": 1}, 
+			"vpn ip": {"connect": 1}
 			}, 
 		"roles": {
 			    "all": {
 				    "vpn ip": {
-				    	"own vpn ips": ["connect"]
+				    	"own vpn ips": {"connect":1}
 				    },
 				    "boobies url": {
-				    	"own boobies urls": ["view", "delete"],
+				    	"own boobies urls": {"view":1, "delete":1},
 				    },
 				    "boobies tag": {
-				    	"own boobies tags": ["add", "delete"],
+				    	"own boobies tags": {"add":1, "delete":1},
 				    }
 			    },
 			    "VPN-all": {
-				    "vpn ip": {"own vpn ips": ["connect"]}
+				    "vpn ip": {"own vpn ips": {"connect":1}}
 			    }, 
 			    "VPN1": {
-				    "vpn ip": {"1.2.3.4": ["connect"]}
+				    "vpn ip": {"1.2.3.4": {"connect":1}}
 			    }, 
 			}
 		};
