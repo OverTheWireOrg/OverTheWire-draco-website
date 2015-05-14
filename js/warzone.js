@@ -181,9 +181,10 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 
 	      x[permission] = 1
 	  };
-	  $http.get('/s/keys').
+	  $http.get('/s/roles').
 	    success(function(data) {
-	      $scope.data = {
+	      $scope.data = data;
+	      lalalala = {
 	      	"resources": {
 			"boobies url": { "own boobies urls": []},
 			"boobies tag": {"own boobies tags": [], "tag1": ["own boobies tags"], "tag2": ["own boobies tags"]}, 
