@@ -87,7 +87,6 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
     $scope.data = {
 	"roles": [ "lala" ]
     };
-    $scope.lala = function() { alert(1); };
     $scope.setAlert = function(t, m) {
         if(t == "") {
 	    delete $scope.alerttype;
@@ -145,6 +144,20 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 //}}}
 warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
+	  $scope.addingRole = false;
+	  $scope.roleExists = function(r) {
+	      return !$scope.addingRole && r in $scope.data["roles"];
+	  };
+	  $scope.setAlert = function(t, m) {
+	      if(t == "") {
+		  delete $scope.alerttype;
+		  delete $scope.alertmsg;
+	      } else {
+		  $scope.alerttype = "alert-" + t;
+		  $scope.alertmsg = m;
+	      }
+	  };
+	  $scope.setAlert("","");
 	  $scope.getResourceList = function() {
 	      var out = {};
 	      for(var cat in $scope.data.resources) {
@@ -183,6 +196,14 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	  };
 	  $scope.addOrUpdateRole = function(cmd, name) { 
 		  var token = randomString(32);
+		  if(cmd == 'add') {
+		    if(name in $scope.data["roles"]) {
+		      return;
+		    } else {
+		      $scope.addingRole = true;
+		      $scope.data["roles"][name] = {};
+		    }
+		  }
 		  $http.post('/s/roles/'+cmd, {
 			      "name": name,
 			      "permissions": $scope.data["roles"][name], 
@@ -190,9 +211,30 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 			      }, {headers: {'X-CSRF-Token': token}})
 		      .success(function(data) {
 			  if(data.success) {
-			      alert("success");
+			      $('#addRoleModal').modal("hide");
 			  } else {
-			      alert("fail");
+			      if(cmd == 'add') {
+				delete $scope.data["roles"][name];
+			      }
+			      $scope.setAlert("danger", data.msg);;
+			  }
+			  $scope.addingRole = false;
+		      })
+		      .error(function(data) {
+			  alert("error");
+		      })
+	  };
+	  $scope.deleteRole = function(name) { 
+		  var token = randomString(32);
+		  $http.post('/s/roles/delete', {
+			      "name": name,
+			      "CSRFToken": token,
+			      }, {headers: {'X-CSRF-Token': token}})
+		      .success(function(data) {
+			  if(data.success) {
+			      delete $scope.data["roles"][name];
+			  } else {
+			      $scope.setAlert("danger", data.msg);;
 			  }
 		      })
 		      .error(function(data) {
