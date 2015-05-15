@@ -181,41 +181,28 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 
 	      x[permission] = 1
 	  };
+	  $scope.addOrUpdateRole = function(cmd, name) { 
+		  var token = randomString(32);
+		  $http.post('/s/roles/'+cmd, {
+			      "name": name,
+			      "permissions": $scope.data["roles"][name], 
+			      "CSRFToken": token,
+			      }, {headers: {'X-CSRF-Token': token}})
+		      .success(function(data) {
+			  if(data.success) {
+			      alert("success");
+			  } else {
+			      alert("fail");
+			  }
+		      })
+		      .error(function(data) {
+			  alert("error");
+		      })
+	  };
 	  $http.get('/s/roles').
 	    success(function(data) {
 	      $scope.data = data;
-	      lalalala = {
-	      	"resources": {
-			"boobies url": { "own boobies urls": []},
-			"boobies tag": {"own boobies tags": [], "tag1": ["own boobies tags"], "tag2": ["own boobies tags"]}, 
-			"vpn ip": {"1.2.3.4": ["own vpn ips"], "own vpn ips": [], "3.1.1.7": ["own vpn ips"]}
-			}, 
-		"actions": {
-			"boobies url": { "view": 1, "delete": 1}, 
-			"boobies tag": { "add": 1, "delete": 1}, 
-			"vpn ip": {"connect": 1}
-			}, 
-		"roles": {
-			    "all": {
-				    "vpn ip": {
-				    	"own vpn ips": {"connect":1}
-				    },
-				    "boobies url": {
-				    	"own boobies urls": {"view":1, "delete":1},
-				    },
-				    "boobies tag": {
-				    	"own boobies tags": {"add":1, "delete":1},
-				    }
-			    },
-			    "VPN-all": {
-				    "vpn ip": {"own vpn ips": {"connect":1}}
-			    }, 
-			    "VPN1": {
-				    "vpn ip": {"1.2.3.4": {"connect":1}}
-			    }, 
-			}
-		};
-	    })
+	  });
 	}
 ]);
 //}}}
