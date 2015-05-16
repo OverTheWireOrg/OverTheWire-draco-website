@@ -120,6 +120,9 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 //}}}
 warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$location", //{{{
   function($scope, $http, $window, $location) {
+    $scope.isValidKeyName = function(n) {
+      return true; // FIXME
+    };
     $scope.setAlert = function(t, m) {
         if(t == "") {
 	    delete $scope.alerttype;
@@ -156,6 +159,7 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
     });
     $scope.addKey = function() { 
 	    var token = randomString(32);
+	    // FIXME: invalid key name
 	    $http.post('/s/addkey', {
 	    		"name": $scope.subkeyname, 
 			"role": $scope.subkeyrole, 
@@ -178,6 +182,9 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
 	  $scope.addingRole = false;
+	  $scope.isValidRoleName = function(n) {
+	    return true; // FIXME
+	  };
 	  $scope.roleExists = function(r) {
 	      return !$scope.addingRole && "data" in $scope && "roles" in $scope.data && r in $scope.data["roles"];
 	  };
@@ -230,6 +237,7 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	  $scope.addOrUpdateRole = function(cmd, name) { 
 		  var token = randomString(32);
 		  if(cmd == 'add') {
+		    // FIXME invalid role name
 		    if(name in $scope.data["roles"]) {
 		      return;
 		    } else {
