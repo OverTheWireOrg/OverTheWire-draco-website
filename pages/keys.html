@@ -16,13 +16,36 @@
 			<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': true}"></i>
 		      </div>
 		      <div class="col-xs-5">{{key}}</div>
-		      <div class="col-xs-5">[{{value.role}}]</div>
+		      <div class="col-xs-5">Role: {{value.role}}</div>
 		    </div>
 		 </div>
 	      </div>
 	      <div id="key-details-{{key}}" class="panel-collapse collapse">
 		<div class="panel-body">
-		  SPKAC: {{value.spkac}}
+		    <div class="row">
+		      <div class="col-xs-2">
+			<label class="control-label">Role</label>
+		      </div>
+		      <div class="col-xs-6">
+			<select name="role" class="form-control" ng-model="value.role">
+			  <option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
+			</select>
+		      </div>
+		      <div class="col-xs-4">
+			<button class="btn btn-primary btn-sm btn-group-justified" ng-click="updateKey(key, value.role)">Change role</button>
+		      </div>
+		    </div>
+		    <div class="row">
+		      <div class="col-xs-8">
+			<ul>
+			  <li><a href="">Download certificate</a></li>
+			  <li><a href="">Download SPKAC file</a></li>
+			</ul>
+		      </div>
+		      <div class="col-xs-4">
+			<button class="btn btn-danger btn-sm btn-group-justified" ng-click="deleteKey(key)">Delete key</button>
+		      </div>
+		    </div>
 		</div>
 	      </div>
 	    </div>
@@ -83,11 +106,7 @@
 		<div class="col-md-10">
 		  <div class="controls">
 		    <select name="subkeyrole" class="form-control" ng-model="subkeyrole">
-			<option value="one">One</option>
-			<option value="two">Two</option>
-			<option value="three">Three</option>
-			<option value="four">Four</option>
-			<option value="five">Five</option>
+			<option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
 		    </select>
 		    <p class="help-block">Access role to assign to this key.</p>
 		  </div>

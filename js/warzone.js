@@ -72,21 +72,54 @@ warzoneApp.controller("retrieveUsernameController", ["$scope", "$http", "$window
 
 warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
+	  $scope.data = {
+	      "roles": {},
+	      "keys": {}
+	  };
 	  $http.get('/s/keys').
 	    success(function(data) {
-	      $scope.data = {
-	          "keys": data,
-		  "roles": [ "role1", "role2", "role3", "role4" ]
-	      };
-	    })
+	      $scope.data["keys"] = data;
+	      $http.get('/s/roles').
+		success(function(data) {
+		  $scope.data["roles"] = data["roles"];
+	      })
+	  });
+	  $scope.deleteKey = function(keyname) { 
+	      var token = randomString(32);
+	      $http.post('/s/deletekey', {
+			  "name": keyname, 
+			  "CSRFToken": token,
+			  }, {headers: {'X-CSRF-Token': token}})
+		  .success(function(data) {
+		      if(data.success) {
+			  delete $scope.data["keys"][keyname];
+		      }
+		  })
+		  .error(function(data) {
+		      alert("error");
+		  })
+	  };
+	  $scope.updateKey = function(keyname, role) { 
+	      var token = randomString(32);
+	      $http.post('/s/updatekey', {
+			  "name": keyname, 
+			  "role": role, 
+			  "CSRFToken": token,
+			  }, {headers: {'X-CSRF-Token': token}})
+		  .success(function(data) {
+		      if(data.success) {
+			  //$scope.data["keys"][keyname] = role;
+		      }
+		  })
+		  .error(function(data) {
+		      alert("error");
+		  })
+	  };
 	}
 ]);
 //}}}
 warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$location", //{{{
   function($scope, $http, $window, $location) {
-    $scope.data = {
-	"roles": [ "lala" ]
-    };
     $scope.setAlert = function(t, m) {
         if(t == "") {
 	    delete $scope.alerttype;
@@ -146,7 +179,7 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	function($scope, $http, $window, $location) {
 	  $scope.addingRole = false;
 	  $scope.roleExists = function(r) {
-	      return !$scope.addingRole && r in $scope.data["roles"];
+	      return !$scope.addingRole && "data" in $scope && "roles" in $scope.data && r in $scope.data["roles"];
 	  };
 	  $scope.setAlert = function(t, m) {
 	      if(t == "") {
