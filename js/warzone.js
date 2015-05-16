@@ -169,6 +169,14 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 		.success(function(data) {
 		    if(data.success) {
 		        $('#addKeyModal').modal("hide");
+			$http.get('/s/keys').
+			  success(function(data) {
+			    $scope.data["keys"] = data;
+			    $http.get('/s/roles').
+			      success(function(data) {
+				$scope.data["roles"] = data["roles"];
+			    })
+			});
 		    } else {
 			$scope.setAlert("danger", data.msg);;
 		    }
@@ -252,7 +260,7 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 			      }, {headers: {'X-CSRF-Token': token}})
 		      .success(function(data) {
 			  if(data.success) {
-			      $('#addRoleModal').modal("hide");
+			    $('#addRoleModal').modal("hide");
 			  } else {
 			      if(cmd == 'add') {
 				delete $scope.data["roles"][name];
