@@ -79,7 +79,7 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 	  $http.get('/s/keys').
 	    success(function(data) {
 	      $scope.data["keys"] = data;
-	      $http.get('/s/roles').
+	      $http.get('/s/roles/get').
 		success(function(data) {
 		  $scope.data["roles"] = data["roles"];
 	      })
@@ -172,7 +172,7 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 			$http.get('/s/keys').
 			  success(function(data) {
 			    $scope.data["keys"] = data;
-			    $http.get('/s/roles').
+			    $http.get('/s/roles/get').
 			      success(function(data) {
 				$scope.data["roles"] = data["roles"];
 			    })
@@ -290,7 +290,7 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 			  alert("error");
 		      })
 	  };
-	  $http.get('/s/roles').
+	  $http.get('/s/roles/get').
 	    success(function(data) {
 	      $scope.data = data;
 	  });
