@@ -76,7 +76,7 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 	      "roles": {},
 	      "keys": {}
 	  };
-	  $http.get('/s/keys').
+	  $http.get('/s/keys/get').
 	    success(function(data) {
 	      $scope.data["keys"] = data;
 	      $http.get('/s/roles/get').
@@ -169,7 +169,7 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 		.success(function(data) {
 		    if(data.success) {
 		        $('#addKeyModal').modal("hide");
-			$http.get('/s/keys').
+			$http.get('/s/keys/get').
 			  success(function(data) {
 			    $scope.data["keys"] = data;
 			    $http.get('/s/roles/get').
