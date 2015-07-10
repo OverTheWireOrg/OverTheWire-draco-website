@@ -74,15 +74,11 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 	function($scope, $http, $window, $location) {
 	  $scope.data = {
 	      "roles": {},
-	      "keys": {}
+	      "subkeys": {}
 	  };
-	  $http.get('/s/keys/get').
+	  $http.get('/s/rbacdata').
 	    success(function(data) {
-	      $scope.data["keys"] = data;
-	      $http.get('/s/roles/get').
-		success(function(data) {
-		  $scope.data["roles"] = data["roles"];
-	      })
+	      $scope.data = data;
 	  });
 	  $scope.deleteKey = function(keyname) { 
 	      var token = randomString(32);
@@ -92,7 +88,7 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 			  }, {headers: {'X-CSRF-Token': token}})
 		  .success(function(data) {
 		      if(data.success) {
-			  delete $scope.data["keys"][keyname];
+			  delete $scope.data["subkeys"][keyname];
 		      }
 		  })
 		  .error(function(data) {
@@ -108,7 +104,7 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 			  }, {headers: {'X-CSRF-Token': token}})
 		  .success(function(data) {
 		      if(data.success) {
-			  //$scope.data["keys"][keyname] = role;
+			  //$scope.data["subkeys"][keyname] = role;
 		      }
 		  })
 		  .error(function(data) {
@@ -169,13 +165,9 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 		.success(function(data) {
 		    if(data.success) {
 		        $('#addKeyModal').modal("hide");
-			$http.get('/s/keys/get').
+			$http.get('/s/rbacdata').
 			  success(function(data) {
-			    $scope.data["keys"] = data;
-			    $http.get('/s/roles/get').
-			      success(function(data) {
-				$scope.data["roles"] = data["roles"];
-			    })
+			    $scope.data = data;
 			});
 		    } else {
 			$scope.setAlert("danger", data.msg);;
@@ -290,7 +282,7 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 			  alert("error");
 		      })
 	  };
-	  $http.get('/s/roles/get').
+	  $http.get('/s/rbacdata').
 	    success(function(data) {
 	      $scope.data = data;
 	  });
