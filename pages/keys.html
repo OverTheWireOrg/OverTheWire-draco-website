@@ -119,8 +119,8 @@
 		<div class="col-md-10">
 		      <input id="selectSPKACFile" class="form-control" type="file">
 		      <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key. A private key and accompanying SPKAC file can be generated usign the following OpenSSL commands:
-		      <pre>openssl genrsa -out privkey.pem 2048
-openssl spkac -key privkey.pem -out spkac.cnf</p>
+		      <pre>openssl genrsa -out {{user.name}}-{{subkeyname}}.key 2048
+openssl spkac -key {{user.name}}-{{subkeyname}}.key -out {{user.name}}-{{subkeyname}}.spkac</p>
 		</div>
 	    </div>
 	    <div class="footer">
