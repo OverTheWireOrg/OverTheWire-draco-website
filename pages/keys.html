@@ -1,65 +1,29 @@
 <div class="container col-md-9 mycontent">
 <div ng-show="data">
-    <h1>Your subkeys</h1>
+    <h1>Subkeys for {{user.name}}</h1>
 
     <div class="container">
-      <div class="row clearfix">
-	<div class="col-md-6 column">
-	  <div class="panel-group" id="panel-keys">
-
-
-	    <div class="panel panel-default" ng-repeat="(key, value) in data.subkeys">
-	      <div class="panel-heading">
-		 <div class="panel-title collapsed" data-toggle="collapse" href="#key-details-{{key}}">
-		    <div class="row">
-		      <div class="col-xs-2">
-			<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': true}"></i>
-		      </div>
-		      <div class="col-xs-5">{{key}}</div>
-		      <div class="col-xs-5">Role: {{value.role}}</div>
-		    </div>
-		 </div>
-	      </div>
-	      <div id="key-details-{{key}}" class="panel-collapse collapse">
-		<div class="panel-body">
-		    <div class="row">
-		      <div class="col-xs-2">
-			<label class="control-label">Role</label>
-		      </div>
-		      <div class="col-xs-6">
-			<select name="role" class="form-control" ng-model="value.role">
-			  <option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
-			</select>
-		      </div>
-		      <div class="col-xs-4">
-			<button class="btn btn-primary btn-sm btn-group-justified" ng-click="updateKey(key, value.role)">Change role</button>
-		      </div>
-		    </div>
-		    <div class="row">
-		      <div class="col-xs-8">
-			<ul>
-			  <li><a href="/s/user/{{user.name}}/subkey/{{key}}/download">Download certificate</a></li>
-			</ul>
-		      </div>
-		      <div class="col-xs-4">
-			<button class="btn btn-danger btn-sm btn-group-justified" ng-click="deleteKey(key)">Delete key</button>
-		      </div>
-		    </div>
-		</div>
-	      </div>
-	    </div>
-
-	  </div>
-	</div>
+      <div class="col-xs-7">
+	<table class="table">
+	<tr ng-repeat="(key, value) in data.subkeys">
+	  <td><label for="select-{{key}}">{{key}}</label></td>
+	  <td>
+		<select id="select-{{key}}" name="role" class="form-control" ng-model="value.role" ng-change="updateKey(key, value.role)">
+		  <option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
+		</select>
+	  </td>
+	  <td><a href="/s/user/{{user.name}}/subkey/{{key}}/download">{{user.name}}-{{key}}.crt</a></td>
+	  <td><i class="pull-left glyphicon glyphicon-remove" ng-click="deleteKey(key)"></i></td>
+	</tr>
+	<tr>
+	  <td>
+	    <button class="btn btn-primary btn-sm btn-group-justified" data-toggle="modal" data-target="#addKeyModal"><i class="pull-left glyphicon glyphicon-plus"></i>Add key</button>
+	  </td><td></td><td></td><td></td>
+	</tr>
+	</table>
       </div>
-
-      <div class="row clearfix">
-	<div class="col-md-6 column">
-	    <button class="btn btn-primary btn-lg btn-group-justified" data-toggle="modal" data-target="#addKeyModal">Add key</button>
-	</div>
-      </div>
-
     </div>
+
 
 
 </div>
