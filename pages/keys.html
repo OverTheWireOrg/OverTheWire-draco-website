@@ -6,10 +6,10 @@
       <div class="col-xs-7">
 	<table class="table">
 	<tr ng-repeat="(key, value) in data.subkeys">
-	  <td><label for="select-{{key}}">{{key}}</label></td>
+	  <td><label>{{key}}</label></td>
 	  <td>
-		<select id="select-{{key}}" name="role" class="form-control" ng-model="value.role" ng-change="updateKey(key, value.role)">
-		  <option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
+		<select name="role" class="form-control" ng-model="data.subkeys[key].role" ng-change="updateKey(key, data.subkeys[key].role)">
+		  <option ng-repeat="(rolename, dontcare) in data.roles" ng-selected="{{rolename == data.subkeys[key].role}}" value="{{rolename}}">{{rolename}}</option>
 		</select>
 	  </td>
 	  <td><a href="/s/user/{{user.name}}/subkey/{{key}}/download">{{user.name}}-{{key}}.crt</a></td>
@@ -82,9 +82,10 @@
 		</div>
 		<div class="col-md-10">
 		      <input id="selectSPKACFile" class="form-control" type="file">
-		      <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key. A private key and accompanying SPKAC file can be generated usign the following OpenSSL commands:
-		      <pre>openssl genrsa -out {{user.name}}-{{subkeyname}}.key 2048
-openssl spkac -key {{user.name}}-{{subkeyname}}.key -out {{user.name}}-{{subkeyname}}.spkac</p>
+		      <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key.</p>
+		      <p ng-show="subkeyname">A private key and accompanying SPKAC file can be generated using the following OpenSSL commands:
+		      <pre ng-show="subkeyname">openssl genrsa -out {{user.name}}-{{subkeyname}}.key 2048
+openssl spkac -key {{user.name}}-{{subkeyname}}.key -out {{user.name}}-{{subkeyname}}.spkac</pre></p>
 		</div>
 	    </div>
 	    <div class="footer">
