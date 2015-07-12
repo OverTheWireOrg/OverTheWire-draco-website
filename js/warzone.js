@@ -19,6 +19,7 @@ function randomString(n) { //{{{
 
 warzoneApp.config(['$routeProvider', function($routeProvider) { //{{{
     $routeProvider
+	.when('/overview', 	{ templateUrl : 'pages/overview.html' })
 	.when('/help', 		{ templateUrl : 'pages/help/index.html' })
 	.when('/help/account', 	{ templateUrl : 'pages/help/account.html' })
 	.when('/help/overview', { templateUrl : 'pages/help/overview.html' })

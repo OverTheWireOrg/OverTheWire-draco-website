@@ -1,29 +1,12 @@
-<div ng-show="stats">
 <div class="col-md-9">
-    <div class="row">
-	<div class="col-md-3 overviewbox"><a class="fill-div" href="/#/liveclients"><img src="/img/client.png">
-	<span class="count">{{ stats.clients }}</span>
-	<span><ng-pluralize count="stats.clients" when="{'one': 'Client', 'other': 'Clients'}"></ng-pluralize></span>
-	</a></div>
-
-	<div class="col-md-3 overviewbox"><a class="fill-div" href="/#/liveservers"><img src="/img/server.png">
-	<span class="count">{{ stats.servers }}</span>
-	<span><ng-pluralize count="stats.servers" when="{'one': 'Server', 'other': 'Servers'}"></ng-pluralize></span>
-	</a></div>
-
-	<div class="col-md-3 overviewbox"><a class="fill-div" href="/#/liverouters"><img src="/img/router.png">
-	<span class="count">{{ stats.routers }}</span>
-	<span><ng-pluralize count="stats.routers" when="{'one': 'Router', 'other': 'Routers'}"></ng-pluralize></span>
-	</a></div>
-    </div>
     <div class="row col-md-9 noticebox">
     The OverTheWire Warzone is currently in a testing phase. All credentials and accounts will be reset once
     the warzone goes public. Join on IRC for discussion.
     </div>
-</div>
+    <div class="row" ng-show="user.name">
+	<div class="col-md-3"></div>
+	<div class="col-md-3 overviewbox"><a class="fill-div" href="/vpn"><img src="/img/router.png"><span>VPN</span></a></div>
+	<div class="col-md-3"></div>
+    </div>
 </div>
 
-<div ng-hide="stats">
-<div class="container col-md-9 mycontent">
-<img src="img/spinner.gif">
-</div>
