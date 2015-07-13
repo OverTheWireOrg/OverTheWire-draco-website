@@ -42,31 +42,33 @@
 	<h4 class="modal-title" id="addKeyModalLabel">Add key</h4>
       </div>
       
-
-      <div ng-show="alerttype" class="alert" ng-class="alerttype" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	<span class="sr-only">Error:</span>
-	  {{alertmsg}}
-      </div>
-
       <div class="modal-body">
 	    <div class="row">
 		<div class="col-md-2">
 		  <label class="control-label">Subkey name</label>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 		  <div class="controls">
 		    <input name="subkeyname" type="text" placeholder="Subkey name..." class="form-control" ng-model="subkeyname" />
+		      <div ng-show="isValidKeyName(subkeyname) != 'ok' && isValidKeyName(subkeyname) != ''" class="alert alert-danger" role="alert">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			<span ng-show="isValidKeyName(subkeyname) == 'error-charset'">Must only consist of alphanumeric characters, dashes and underscores</span>
+			<span ng-show="isValidKeyName(subkeyname) == 'error-exists'">Must not already exist</span>
+			<span ng-show="isValidKeyName(subkeyname) == 'error-length'">Must be less than or equal to 30 characters</span>
+		      </div>
 		    <p class="help-block">An identifier for this subkey.</p>
 		  </div>
 		</div>
+		<div ng-show="isValidKeyName(subkeyname) == 'ok'" class="col-md-1 green-tick"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+		<div ng-show="isValidKeyName(subkeyname) != 'ok' && isValidKeyName(subkeyname) != ''" class="col-md-1 red-tick"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></div>
 	    </div>
 
 	    <div class="row">
 		<div class="col-md-2">
 		  <label class="control-label">Subkey role</label>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 		  <div class="controls">
 		    <select name="subkeyrole" class="form-control" ng-model="subkeyrole">
 			<option ng-repeat="(rolename, dontcare) in data.roles" value="{{rolename}}">{{rolename}}</option>
@@ -74,23 +76,32 @@
 		    <p class="help-block">Access role to assign to this key.</p>
 		  </div>
 		</div>
+		<div ng-show="isValidRoleName(subkeyrole) == 'ok'" class="col-md-1 green-tick"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+		<div ng-show="isValidRoleName(subkeyrole) == 'error'" class="col-md-1 red-tick"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></div>
 	    </div>
 
-	    <div class="row">
+	    <div class="row control-group">
 		<div class="col-md-2">
 		  <label class="control-label">SPKAC file</label>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 		      <input id="selectSPKACFile" class="form-control" type="file">
+		      <div ng-show="isValidSPKAC() == 'error'" class="alert alert-danger" role="alert">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			This does not appear to be a SPKAC file
+		      </div>
 		      <p class="help-block">An SPKAC (Signed public key and challenge) generated from a private key.</p>
 		      <p ng-show="subkeyname">A private key and accompanying SPKAC file can be generated using the following OpenSSL commands:
 		      <pre ng-show="subkeyname">openssl genrsa -out {{user.name}}-{{subkeyname}}.key 2048
 openssl spkac -key {{user.name}}-{{subkeyname}}.key -out {{user.name}}-{{subkeyname}}.spkac</pre></p>
 		</div>
+		<div ng-show="isValidSPKAC() == 'ok'" class="col-md-1 green-tick"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+		<div ng-show="isValidSPKAC() == 'error'" class="col-md-1 red-tick"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></div>
+
 	    </div>
 	    <div class="footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary" ng-click="addKey()">Add key</button>
+		<button type="button" class="btn btn-primary" ng-click="addKey()" ng-disabled="!(isValidKeyName(subkeyname) == 'ok' && isValidRoleName(subkeyrole) == 'ok' && isValidSPKAC() == 'ok')" >Add key</button>
 	    </div>
       </div>
     </div>

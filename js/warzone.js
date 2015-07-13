@@ -77,10 +77,13 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 	      "roles": {},
 	      "subkeys": {}
 	  };
-	  $http.get('/s/rbacdata').
-	    success(function(data) {
-	      $scope.data = data;
-	  });
+	  $scope.fetchData = function() {
+	      $http.get('/s/rbacdata').
+		success(function(data) {
+		  $scope.data = data;
+	      });
+	  }
+	  $scope.fetchData();
 	  $scope.deleteKey = function(keyname) { 
 	      var token = randomString(32);
 	      $http.post('/s/deletekey', {
@@ -117,8 +120,20 @@ warzoneApp.controller("KeysController", ["$scope", "$http", "$window", "$locatio
 //}}}
 warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$location", //{{{
   function($scope, $http, $window, $location) {
+    var validSPKAC = "";
     $scope.isValidKeyName = function(n) {
-      return true; // FIXME
+      if(!n) return "";
+      if(n in $scope.data["subkeys"]) return "error-exists";
+      if(!n.match(/^[a-zA-Z0-9_-]+$/)) return "error-charset";
+      if(n.length < 1 || n.length > 30) return "error-length";
+      return "ok";
+    };
+    $scope.isValidRoleName = function(n) {
+      if(!n) return "";
+      return "ok";
+    };
+    $scope.isValidSPKAC = function() {
+	return validSPKAC;
     };
     $scope.setAlert = function(t, m) {
         if(t == "") {
@@ -129,7 +144,6 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 	    $scope.alertmsg = m;
 	}
     };
-    $scope.setAlert("","");
     $scope.updateSPKAC = function() {
 	var file = $("#selectSPKACFile").get(0).files[0];
 	var reader = new FileReader();
@@ -138,10 +152,10 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 	    var filecontent = reader.result;
 	    if(filecontent.indexOf("SPKAC=") == 0) {
 		$scope.spkac = filecontent;
-		$scope.setAlert("success", "This file looks like a SPKAC");
+		validSPKAC = "ok";
 	    } else {
 		$scope.spkac = "";
-		$scope.setAlert("danger", "This file is not a SPKAC");
+		validSPKAC = "error";
 	    }
 	    // since we're going through jQuery, we need to notify AngularJS that something changed while it wasn't looking
 	    $scope.$apply();
@@ -166,10 +180,7 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 		.success(function(data) {
 		    if(data.success) {
 		        $('#addKeyModal').modal("hide");
-			$http.get('/s/rbacdata').
-			  success(function(data) {
-			    $scope.data = data;
-			});
+			$scope.$parent.fetchData();
 		    } else {
 			$scope.setAlert("danger", data.msg);;
 		    }

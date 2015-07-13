@@ -170,3 +170,12 @@ iframe {
   align-items: center;
 }
 
+.red-tick {
+    color: #a94442;
+    font-size: 200%;
+}
+
+.green-tick {
+    color: #3c763d;
+    font-size: 200%;
+}
