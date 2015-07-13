@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 	  <td>
-	    <button class="btn btn-primary btn-sm btn-group-justified" data-toggle="modal" data-target="#addKeyModal"><i class="pull-left glyphicon glyphicon-plus"></i>Add key</button>
+	    <button class="btn btn-primary btn-sm btn-group-justified" data-toggle="modal" data-target="#addKeyModal"><i class="pull-left glyphicon glyphicon-plus"></i>Add Subkey</button>
 	  </td><td></td><td></td><td></td>
 	</tr>
 	</table>
@@ -39,7 +39,7 @@
     <div class="modal-content">
       <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<h4 class="modal-title" id="addKeyModalLabel">Add key</h4>
+	<h4 class="modal-title" id="addKeyModalLabel">Add Subkey</h4>
       </div>
       
       <div class="modal-body">
@@ -101,7 +101,7 @@ openssl spkac -key {{user.name}}-{{subkeyname}}.key -out {{user.name}}-{{subkeyn
 
 	    </div>
 	    <div class="footer">
-		<button type="button" class="btn btn-primary" ng-click="addKey()" ng-disabled="!(isValidKeyName(subkeyname) == 'ok' && isValidRoleName(subkeyrole) == 'ok' && isValidSPKAC() == 'ok')" >Add key</button>
+		<button type="button" class="btn btn-primary" ng-click="addKey()" ng-disabled="!(isValidKeyName(subkeyname) == 'ok' && isValidRoleName(subkeyrole) == 'ok' && isValidSPKAC() == 'ok')" >Add Subkey</button>
 	    </div>
       </div>
     </div>
