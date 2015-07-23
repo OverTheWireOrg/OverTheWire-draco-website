@@ -10,13 +10,13 @@
 	    <div class="panel panel-default" ng-repeat="(rolename, catrec) in data.roles">
 	      <div class="panel-heading">
 		 <div class="panel-title collapsed" href="#role-details-{{rolename}}">
-		    <div class="row">
+		    <div class="row" ng-click="lala(rolename)">
 		      <div class="col-xs-1">
-			<i class="pull-left glyphicon glyphicon-chevron-down" ng-click="lala(rolename)"></i>
+			<i class="pull-left glyphicon glyphicon-chevron-down"></i>
 		      </div>
 		      <div class="col-xs-10">{{rolename}}</div>
 		      <div class="col-xs-1">
-			<i class="pull-left glyphicon glyphicon-remove" ng-click="bla(rolename)"></i>
+			<i class="pull-left glyphicon glyphicon-remove" ng-click="bla(rolename, $event)"></i>
 		      </div>
 		    </div>
 		 </div>
