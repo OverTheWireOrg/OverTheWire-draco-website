@@ -197,6 +197,8 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	  $scope.isValidRoleName = function(n) {
 	    return true; // FIXME
 	  };
+	  $scope.lala = function(rolename) { $("#role-details-"+rolename).collapse('toggle') }
+	  $scope.bla = function() { alert("bla"); }
 	  $scope.roleExists = function(r) {
 	      return !$scope.addingRole && "data" in $scope && "roles" in $scope.data && r in $scope.data["roles"];
 	  };

@@ -2,18 +2,22 @@
 <div ng-show="data">
     <h1>Your roles</h1>
 
+    {{data.roles}}
     <div class="container">
       <div class="row clearfix">
 	<div class="col-md-6 column">
 	  <div class="panel-group" id="panel-roles">
 	    <div class="panel panel-default" ng-repeat="(rolename, catrec) in data.roles">
 	      <div class="panel-heading">
-		 <div class="panel-title collapsed" data-toggle="collapse" href="#role-details-{{rolename}}">
+		 <div class="panel-title collapsed" href="#role-details-{{rolename}}">
 		    <div class="row">
 		      <div class="col-xs-1">
-			<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': true}"></i>
+			<i class="pull-left glyphicon glyphicon-chevron-down" ng-click="lala(rolename)"></i>
 		      </div>
 		      <div class="col-xs-10">{{rolename}}</div>
+		      <div class="col-xs-1">
+			<i class="pull-left glyphicon glyphicon-remove" ng-click="bla(rolename)"></i>
+		      </div>
 		    </div>
 		 </div>
 	      </div>
