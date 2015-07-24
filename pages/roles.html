@@ -79,24 +79,26 @@
 	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	<h4 class="modal-title" id="addRoleModalLabel">Add role</h4>
       </div>
-      
-
-      <div ng-show="roleExists(roleToAdd)" class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	<span class="sr-only">Error:</span>
-	Rolename already exists {{roleToAdd}}
-      </div>
 
       <div class="modal-body">
 	    <div class="row">
 		<div class="col-md-2">
 		  <label class="control-label">Role name</label>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 		  <div class="controls">
 		    <input name="roleToAdd" type="text" placeholder="Role name..." class="form-control" ng-model="roleToAdd" />
+		      <div ng-show="isValidRoleName(roleToAdd) != 'ok' && isValidRoleName(roleToAdd) != ''" class="alert alert-danger" role="alert">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			<span ng-show="isValidRoleName(roleToAdd) == 'error-charset'">Must only consist of alphanumeric characters, dashes and underscores</span>
+			<span ng-show="isValidRoleName(roleToAdd) == 'error-exists'">Must not already exist</span>
+			<span ng-show="isValidRoleName(roleToAdd) == 'error-length'">Must be less than or equal to 30 characters</span>
+		      </div>
 		  </div>
 		</div>
+		<div ng-show="isValidRoleName(roleToAdd) == 'ok'" class="col-md-1 green-tick"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+		<div ng-show="isValidRoleName(roleToAdd) != 'ok' && isValidRoleName(roleToAdd) != ''" class="col-md-1 red-tick"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i></div>
 	    </div>
 	    <div class="footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

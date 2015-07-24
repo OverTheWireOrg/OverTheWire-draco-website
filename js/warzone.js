@@ -195,13 +195,14 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 	function($scope, $http, $window, $location) {
 	  $scope.addingRole = false;
 	  $scope.isValidRoleName = function(n) { // {{{
-	    return true; // FIXME
+	    if(!n) return "";
+	    if(n in $scope.data["roles"]) return "error-exists";
+	    if(!n.match(/^[a-zA-Z0-9_-]+$/)) return "error-charset";
+	    if(n.length < 1 || n.length > 30) return "error-length";
+	    return "ok";
 	  }; // }}}
 	  $scope.expandRole = function(rolename) { // {{{
 	      $("#role-details-"+rolename).collapse('toggle')
-	  }; // }}}
-	  $scope.roleExists = function(r) { // {{{
-	      return !$scope.addingRole && "data" in $scope && "roles" in $scope.data && r in $scope.data["roles"];
 	  }; // }}}
 	  $scope.setAlert = function(t, m) { // {{{
 	      if(t == "") {
