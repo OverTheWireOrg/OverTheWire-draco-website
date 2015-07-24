@@ -194,15 +194,16 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
 warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$location", //{{{
 	function($scope, $http, $window, $location) {
 	  $scope.addingRole = false;
-	  $scope.isValidRoleName = function(n) {
+	  $scope.isValidRoleName = function(n) { // {{{
 	    return true; // FIXME
-	  };
-	  $scope.lala = function(rolename) { $("#role-details-"+rolename).collapse('toggle') }
-	  $scope.bla = function(rolename, $event) { $event.stopPropagation(); alert("bla"); }
-	  $scope.roleExists = function(r) {
+	  }; // }}}
+	  $scope.expandRole = function(rolename) { // {{{
+	      $("#role-details-"+rolename).collapse('toggle')
+	  }; // }}}
+	  $scope.roleExists = function(r) { // {{{
 	      return !$scope.addingRole && "data" in $scope && "roles" in $scope.data && r in $scope.data["roles"];
-	  };
-	  $scope.setAlert = function(t, m) {
+	  }; // }}}
+	  $scope.setAlert = function(t, m) { // {{{
 	      if(t == "") {
 		  delete $scope.alerttype;
 		  delete $scope.alertmsg;
@@ -210,9 +211,8 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 		  $scope.alerttype = "alert-" + t;
 		  $scope.alertmsg = m;
 	      }
-	  };
-	  $scope.setAlert("","");
-	  $scope.getResourceList = function() {
+	  }; // }}}
+	  $scope.getResourceList = function() { // {{{
 	      var out = {};
 	      for(var cat in $scope.data.resources) {
 		  for(var r in $scope.data.resources[cat]) {
@@ -220,35 +220,14 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 		  }
 	      }
 	      return out;
-	  };
-	  $scope.getActionList = function(r) {
+	  }; // }}}
+	  $scope.getActionList = function(r) { // {{{
 	      var rdict = $scope.getResourceList();
 	      if(!(r in rdict)) [];
 	      var cat = rdict[r];
 	      return $scope.data.actions[cat];
-	  };
-	  $scope.revokePermission = function(role,category,resource,permission) {
-	      delete $scope.data["roles"][role][category][resource][permission];
-	  };
-	  $scope.addPermission = function(role,resource,permission) {
-	      var rdict = $scope.getResourceList();
-	      if(!(resource in rdict)) return;
-
-	      var category = rdict[resource];
-	      var x = $scope.data;
-
-	      if(!("roles" in x)) { x["roles"] = {}; }
-	      x = x["roles"];
-	      if(!(role in x)) { x[role] = {}; }
-	      x = x[role];
-	      if(!(category in x)) { x[category] = {}; }
-	      x = x[category];
-	      if(!(resource in x)) { x[resource] = {}; }
-	      x = x[resource];
-
-	      x[permission] = 1
-	  };
-	  $scope.addOrUpdateRole = function(cmd, name) { 
+	  }; // }}}
+	  $scope.addOrUpdateRole = function(cmd, name) { // {{{
 		  var token = randomString(32);
 		  if(cmd == 'add') {
 		    // FIXME invalid role name
@@ -278,8 +257,33 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 		      .error(function(data) {
 			  alert("error");
 		      })
-	  };
-	  $scope.deleteRole = function(name) { 
+	  }; // }}}
+	  $scope.revokePermission = function(role,category,resource,permission) { // {{{
+	      delete $scope.data["roles"][role][category][resource][permission];
+	      $scope.addOrUpdateRole('update', role);
+	  }; // }}}
+	  $scope.addPermission = function(role,resource,permission) { // {{{
+	      var rdict = $scope.getResourceList();
+	      if(!(resource in rdict)) return;
+
+	      var category = rdict[resource];
+	      var x = $scope.data;
+
+	      if(!("roles" in x)) { x["roles"] = {}; }
+	      x = x["roles"];
+	      if(!(role in x)) { x[role] = {}; }
+	      x = x[role];
+	      if(!(category in x)) { x[category] = {}; }
+	      x = x[category];
+	      if(!(resource in x)) { x[resource] = {}; }
+	      x = x[resource];
+
+	      x[permission] = 1
+
+	      $scope.addOrUpdateRole('update', role);
+	  }; // }}}
+	  $scope.deleteRole = function(name, $event) {  // {{{
+		  if($event) $event.stopPropagation(); 
 		  var token = randomString(32);
 		  $http.post('/s/roles/delete', {
 			      "name": name,
@@ -295,7 +299,9 @@ warzoneApp.controller("RolesController", ["$scope", "$http", "$window", "$locati
 		      .error(function(data) {
 			  alert("error");
 		      })
-	  };
+	  }; // }}}
+
+	  $scope.setAlert("","");
 	  $http.get('/s/rbacdata').
 	    success(function(data) {
 	      $scope.data = data;

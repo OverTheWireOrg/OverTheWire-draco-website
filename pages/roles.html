@@ -2,7 +2,6 @@
 <div ng-show="data">
     <h1>Your roles</h1>
 
-    {{data.roles}}
     <div class="container">
       <div class="row clearfix">
 	<div class="col-md-6 column">
@@ -10,13 +9,13 @@
 	    <div class="panel panel-default" ng-repeat="(rolename, catrec) in data.roles">
 	      <div class="panel-heading">
 		 <div class="panel-title collapsed" href="#role-details-{{rolename}}">
-		    <div class="row" ng-click="lala(rolename)">
+		    <div class="row" ng-click="expandRole(rolename)">
 		      <div class="col-xs-1">
 			<i class="pull-left glyphicon glyphicon-chevron-down"></i>
 		      </div>
 		      <div class="col-xs-10">{{rolename}}</div>
 		      <div class="col-xs-1">
-			<i class="pull-left glyphicon glyphicon-remove" ng-click="bla(rolename, $event)"></i>
+			<i class="pull-left glyphicon glyphicon-remove" ng-click="deleteRole(rolename, $event)"></i>
 		      </div>
 		    </div>
 		 </div>
@@ -50,11 +49,6 @@
 			  </div>
 			  <div class="col-xs-3"><button class="btn btn-primary btn-sm btn-group-justified" data-ng-disabled="!resourceToAdd || !actionToAdd" ng-click="addPermission(rolename, resourceToAdd, actionToAdd)">Add</button></div>
 			</div>
-			<div class="row">
-			  <div class="col-xs-6"><button class="btn btn-primary btn-sm btn-group-justified" ng-click="addOrUpdateRole('update',rolename)">Save</button></div>
-			  <div class="col-xs-6"><button class="btn btn-primary btn-sm btn-group-justified" ng-click="deleteRole(rolename)">Delete</button></div>
-			</div>
-
 		      </div>
 		    </div>
 		</div>
