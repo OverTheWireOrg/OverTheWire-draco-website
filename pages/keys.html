@@ -12,7 +12,8 @@
 		  <option ng-repeat="(rolename, dontcare) in data.roles" ng-selected="{{rolename == data.subkeys[key].role}}" value="{{rolename}}">{{rolename}}</option>
 		</select>
 	  </td>
-	  <td><a href="/s/user/{{user.name}}/subkey/{{key}}/download">{{user.name}}-{{key}}.crt</a></td>
+	  <td ng-show="data.subkeys[key].status == 'active'"><a href="/s/user/{{user.name}}/subkey/{{key}}/download">{{user.name}}-{{key}}.crt</a></td>
+	  <td ng-hide="data.subkeys[key].status == 'active'">(Subkey has not been signed yet)</td>
 	  <td><i class="pull-left glyphicon glyphicon-remove" ng-click="deleteKey(key)"></i></td>
 	</tr>
 	<tr>
