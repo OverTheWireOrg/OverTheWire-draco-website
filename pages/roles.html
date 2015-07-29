@@ -1,6 +1,6 @@
 <div class="container col-md-9 mycontent">
 <div ng-show="data">
-    <h1>Your roles</h1>
+    <h1>Roles for {{user.name}}</h1>
 
     <div class="container">
       <div class="row clearfix">
@@ -23,8 +23,12 @@
 	      <div id="role-details-{{rolename}}" class="panel-collapse collapse">
 		<div class="panel-body">
 		    <div class="row">
-		      <div class="col-xs-4">User of this role can... </div>
+		      <div class="col-xs-4"><br/>User of this role can... </div>
 		      <div class="col-xs-8">
+			<div class="row lightitalic">
+			  <div class="col-xs-4">action</div>
+			  <div class="col-xs-6">resource</div>
+			</div>
 		        <div ng-repeat="(category, rolerec) in catrec">
 			  <div ng-repeat="(resource, permlist) in rolerec">
 			    <div class="row" ng-repeat="(perm,dontcare) in permlist">

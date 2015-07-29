@@ -179,3 +179,8 @@ iframe {
     color: #3c763d;
     font-size: 200%;
 }
+
+.lightitalic {
+    color: #ddd;
+    font-style: italic;
+}
