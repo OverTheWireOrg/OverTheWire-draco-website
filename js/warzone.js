@@ -129,7 +129,6 @@ warzoneApp.controller("AddKeyController", ["$scope", "$http", "$window", "$locat
       return "ok";
     };
     $scope.isValidRoleName = function(n) {
-      if(!n) return "";
       return "ok";
     };
     $scope.isValidSPKAC = function() {
