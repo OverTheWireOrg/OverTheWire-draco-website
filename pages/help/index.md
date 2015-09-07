@@ -9,18 +9,7 @@ The warzone is an isolated network simulating the entire IPv4 internet, on which
 devices are targets to be hacked. Unlike wargames, the warzone allows players to connect
 their own hackable servers or devices with any software they like, as long as it speaks IP.
 
-
-<a data-toggle="collapse" data-target="#generic">Read more/less</a>
-
-<div id="generic" class="panel-collapse collapse">
-- simulates real IPv4 internet
-- can connect own servers
-- is designed to be hacked
-- can connect own applications
-- central authentication/authorization system which can be used by third-party applications
-- single signon
-</div>
-
+To get access to the warzone, follow the steps below.
 </div>
 </div>
 
@@ -29,14 +18,17 @@ their own hackable servers or devices with any software they like, as long as it
 <div class="col-md-3 warzoneMargin10px warzoneRoundCorners3px warzoneBackgroundWhite50">
 ## 1. Create an account
 
+Click the "Register" button and follow the instructions. Account activation may
+take a couple minutes.
+
+<a data-toggle="collapse" data-target="#step1">More information...</a>
+
+<div id="step1" class="panel-collapse collapse">
 To exist on the warzone, you need an account. Setting up an account is easy and
 painless.  Click on the *Register* button, select a username and register. Once
 your account has been activated, you will be able to use the warzone and its
 applications.
 
-<a data-toggle="collapse" data-target="#step1">Read more/less</a>
-
-<div id="step1" class="panel-collapse collapse">
 All authentication in the warzone is based on public-key cryptography, to avoid
 having to store password hashes that may be leaked through a compromise later.
 
@@ -61,22 +53,29 @@ The authentication process is again painless and requires little interaction.
 <div class="col-md-3 warzoneMargin10px warzoneRoundCorners3px warzoneBackgroundWhite50">
 ## 2. Activate applications
 
-With an account, you can get access to applications in the warzone (e.g. the VPN).
-To get access, you must activate the application so that it is aware of your account.
-You will find a list of available applications on the Overview page.
+Once your account is activated,
+go to the "Overview" page and enable the applications you want to use.
 
-<a data-toggle="collapse" data-target="#step2">Read more/less</a>
+<a data-toggle="collapse" data-target="#step2">More information...</a>
 
 <div id="step2" class="panel-collapse collapse">
+
+With an account, you can get access to applications in the warzone (e.g. the
+VPN).  To get access, you must activate the application so that it is aware of
+your account.  You will find a list of available applications on the Overview
+page.
+
 Because authentication in the warzone is based on public-key cryptography, we
-basically get single-signon functionality for free. Any website accepting warzone
-credentials can easily verify whether a visitor has valid credentials by comparing
-the presented certificate against the warzone CA, both public information.
+basically get single-signon functionality for free. Any website accepting
+warzone credentials can easily verify whether a visitor has valid credentials
+by comparing the presented certificate against the warzone CA, both public
+information.
 
 These websites or applications, can offer services available to visitors with
-accounts in the warzone. An application may need to keep track of application-specific
-information about you, such as a list of IP addresses which you "own" on the warzone VPN network.
-This is why an application needs to be "activated" for first use. 
+accounts in the warzone. An application may need to keep track of
+application-specific information about you, such as a list of IP addresses
+which you "own" on the warzone VPN network.  This is why an application needs
+to be "activated" for first use. 
 </div>
 
 </div>
@@ -84,7 +83,10 @@ This is why an application needs to be "activated" for first use.
 <div class="col-md-3 warzoneMargin10px warzoneRoundCorners3px warzoneBackgroundWhite50">
 ## 3. Create keys and roles
 
-<a data-toggle="collapse" data-target="#step3">Read more/less</a>
+You can attach any number of "subkeys" to your account to delegate sets of
+privileges (grouped by roles). If a subkey is compromised, you can revoke it.
+
+<a data-toggle="collapse" data-target="#step3">More information...</a>
 <div id="step3" class="panel-collapse collapse">
 In the unlikely event that the private key locked inside your browser is
 exposed and stolen, your warzone account is compromised.  Someone with access
@@ -106,15 +108,17 @@ making it useless to whoever stole it.
 In addition to being revocable, subkeys have an RBAC role attached to them
 which allows you to limit what they can be used for.
 
-Each application you sign up for, will give you a set of permissions
-and with the RBAC system, you can select which of those permissions are
-accessible for a certain subkey.
+Each application you sign up for, will give you access to a set of privileges.
+For instance, the VPN application has a basic privilege to connect to the VPN,
+and additional privileges which route traffic to certain static IP addresses,
+to your VPN client.  Privileges can be grouped into roles, and those roles can
+then be assigned to subkeys.
 
-As a practical example, assume you sign up for the VPN app and get access to
-three fixed IP addresses A, B and C.  If you set up a game which only needs
-access to IP address A, you can create a role that only has this permission and
-attach it to the subkey you use for this game. When the game is compromised,
-you can drop the subkey and attach that same role to a new subkey.
+As a practical example, assume you sign up for the VPN application and get
+access to three fixed IP addresses A, B and C.  If you set up a game which only
+needs access to IP address A, you can create a role that only has this
+privilege and attach it to the subkey you use for this game. When the game is
+compromised, you can drop the subkey and attach that same role to a new subkey.
 
 </div>
 
