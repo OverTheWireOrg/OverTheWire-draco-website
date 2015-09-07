@@ -20,7 +20,9 @@ Last operation change: <span am-time-ago="data.lastOperationChange * 1000"></spa
 </pre>
 
 <div ng-hide="data.status == 'active'">
-Account has not been approved yet. Please come back in a short while.
+Account has not been approved yet. Please come back to this page in a short while.
+
+[TODO: autorefresh would be nice...]
 </div>
 <div ng-show="data.status == 'active'">
 Certificate: <a href="{{data.cert_url}}">install</a>
